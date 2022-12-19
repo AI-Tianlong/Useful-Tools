@@ -6,5 +6,5 @@ Some Useful Tools Code
 ## 一些常用的命令
 ### 给Jupyter notebook添加kernel
 ```bash
-python -m ipykernel install --user --name tensorflowenv --display-name "Python (tensorflowenv)"
+python -m ipykernel install --user --name xxx --display-name "Python (xxx)"
 ```
