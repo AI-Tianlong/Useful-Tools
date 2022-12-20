@@ -21,3 +21,7 @@ watch -n 0.1 ls -lh
 git clone https://ghproxy.com/xxxxxxxxx
 ```
 
+### 创建符号链接
+```bash
+ln -s /HOME/scz5158/run/ATL/OpenMMLab/Dataset/cityscapes ./
+```
