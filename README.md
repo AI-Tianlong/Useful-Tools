@@ -15,4 +15,9 @@ python -m ipykernel install --user --name xxx --display-name "Python (xxx)"
 ```bash
 watch -n 0.1 ls -lh
 ```
+### Git clone 代理
+
+```bash
+git clone https://ghproxy.com/xxxxxxxxx
+```
 
