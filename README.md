@@ -5,6 +5,14 @@ Some Useful Tools Code
 
 ## 一些常用的命令
 ### 给Jupyter notebook添加kernel
+
 ```bash
 python -m ipykernel install --user --name xxx --display-name "Python (xxx)"
 ```
+
+### Linux下查看文件的大小 (VSCODE中查看传输数据的多少)
+
+```bash
+watch -n 0.1 ls -lh
+```
+
