@@ -32,7 +32,7 @@ from multiprocessing import Process
 
 num_progress = 6
 
-data_root = 'data/cityscapes'
+data_root = 'data/cityscapes_zip'
 
 txt_files = ['train.txt', 'val.txt','test.txt']
 data_files = ['train', 'val', 'test']
@@ -40,7 +40,7 @@ data_files = ['train', 'val', 'test']
 leftImg8bit = 'leftImg8bit'
 gtFine = 'gtFine'
 
-output_path = '/HOME/scz5158/run/ATL/OpenMMLab/Dataset/cityscapes-final'
+output_path = 'data/cityscapes'
 
 # create output files
 if not os.path.exists(output_path): 
