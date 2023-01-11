@@ -28,7 +28,7 @@
 * <font color='red'>将目录切换至该py文件下</font>，运行以下命令 [参考mmsegmentation cityscapes](https://github.com/open-mmlab/mmsegmentation/blob/master/docs/en/dataset_prepare.md#cityscapes)
     ```bash
   # --nproc means 8 process for conversion, which could be omitted as well.
-  python cityscapes.py data/cityscapes --nproc 8
+  python cityscapes.py data/cityscapes_zip --nproc 8
     ```
  * 运行上述命令后，会在`gtFine`文件中生成`**labelTrainIds.png`，该图像即为训练所需的标签。以及三个文件`train.txt`、`test.txt`、`val.txt`，存放着train、test、val数据集的图像名称，接下来需要用该名称以及获得的`**labelTrainIds.png`去生成最终的究极无敌版数据集！
   如下所示
