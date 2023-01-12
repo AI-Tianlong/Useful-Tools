@@ -9,6 +9,10 @@ Some Useful Tools Code
 ```bash
 python -m ipykernel install --user --name xxx --display-name "Python (xxx)"
 ```
+### 删除jupyter ipykernel
+```bash
+jupyter kernelspec remove xxx
+```
 
 ### Linux下查看文件的大小 (VSCODE中查看传输数据的多少)
 
