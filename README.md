@@ -4,6 +4,11 @@ Some Useful Tools Code
 给自己备份以便将来之需。  
 
 ## 一些常用的命令
+### unzip
+```bash
+unzip  -d 要解压缩到的文件夹路径 被解压的文件路径
+```
+
 ### 给Jupyter notebook添加kernel
 
 ```bash
