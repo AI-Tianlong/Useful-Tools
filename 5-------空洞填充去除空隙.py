@@ -1,3 +1,7 @@
+'''
+分割后的图像会有某些像素分错，通过空洞填充的方式进行后处理
+'''
+
 
 import os
 import threading
