@@ -8,3 +8,11 @@ python -m ipykernel install --user --name xxx --display-name "Python (xxx)"
 ```bash
 jupyter kernelspec remove xxx
 ```
+### conda 创建环境ATL
+```bash
+conda create -n ATL python=3.9
+```
+### conda删除环境
+```bash
+conda rm -n ATL --all
+```
