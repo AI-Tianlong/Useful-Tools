@@ -36,3 +36,9 @@ git checkout dev-1.x
 git checkout -b AI-Tianlong/support_Mapillary_dataset
 ```
 
+### git add+commit+push
+```bash
+git add .
+git commit -m "xxxxx"       (--no-verify,有pre-commit hook的话)
+git push                    (第一次 git push -u origin 分支名字)
+```
