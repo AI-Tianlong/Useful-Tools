@@ -4,64 +4,35 @@ Some Useful Tools Code
 给自己备份以便将来之需。  
 
 ## 一些常用的命令
-### unzip
-```bash
-unzip  -d 要解压缩到的文件夹路径 被解压的文件路径
-```
+* [Linux命令](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/Linux%E5%91%BD%E4%BB%A4.md)
 
-### 给Jupyter notebook添加kernel
+* [Chrome翻译问题](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/Chrome%E7%BF%BB%E8%AF%91%E9%97%AE%E9%A2%98.md)
 
-```bash
-python -m ipykernel install --user --name xxx --display-name "Python (xxx)"
-```
-### 删除jupyter ipykernel
-```bash
-jupyter kernelspec remove xxx
-```
+* [Jupyter相关的](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/Jupyter%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)
 
-### Linux下查看文件的大小 (VSCODE中查看传输数据的多少)
+* [Git相关的](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/Git%E7%9B%B8%E5%85%B3.md)
 
-```bash
-watch -n 0.1 ls -lh
-```
-### Git clone 代理
+* [超算相关的](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E8%B6%85%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9A%84.md)
 
-```bash
-git clone https://ghproxy.com/xxxxxxxxx
-```
-
-### 创建符号链接
-```bash
-ln -s /HOME/scz5158/run/ATL/OpenMMLab/Dataset/cityscapes ./
-```
-### Chrome不能翻译
-* C:\Windows\System32\drivers\etc 找到hosts
-* 参考
-* https://blog.csdn.net/w_p_wyd/article/details/121836304
-* https://zhuanlan.zhihu.com/p/576290326
-```bash
-# 我找到了几个可用的谷歌国外 IP，不保证长期可用，后续也不保证更新，有能力的建议自己找。
-# 任选一个加到 Hosts 文件中并重启浏览器，建议使用前先在 CMD 中 Ping 一下确保可用。
-
-# 注意！添加以下内容时，请不要在开头加上 # 井号，# 是注释符，行首加了 # 就等于这行没写！
-
-# 提示：添加以下内容之前，请先删除 Hosts 文件中以前添加过的所有 translate.googleapis.com 内容，避免因为顺序而被覆盖！
-
-142.250.4.90 translate.googleapis.com
-142.250.30.90 translate.googleapis.com
-142.250.99.90 translate.googleapis.com
-142.250.101.90 translate.googleapis.com
-142.250.105.90 translate.googleapis.com
-142.250.107.90 translate.googleapis.com
-172.253.112.90 translate.googleapis.com
-172.253.114.90 translate.googleapis.com
-172.253.116.90 translate.googleapis.com
-172.253.124.90 translate.googleapis.com
-
-# 如果你有 IPv6 可以用下面的这些，没有请勿使用
-2800:3f0:4004:806::200a translate.googleapis.com
-2800:3f0:4004:805::200a translate.googleapis.com
-2800:3f0:4003:c02::5f translate.googleapis.com
-
-# 注意：这些 IP 只能指向谷歌翻译 API 接口域名，指向其他谷歌域名是无法使用的。
-```
+## 一些写的很烂的code
+### 数据集相关的
+* [创建cityscapes数据集](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/7-------%E5%88%9B%E5%BB%BAcityscapes%E6%95%B0%E6%8D%AE%E9%9B%86/)
+* [创建mapillary数据集](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/8-------%E5%88%9B%E5%BB%BAmapillary%E6%95%B0%E6%8D%AE%E9%9B%86/)
+* GID数据集
+  * [RGB2mask](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/17-----GID_create_masks_png.ipynb)
+  * [crop](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/19-----GID_crop_images.ipynb)
+* LoveDA数据集
+  * [mask2RGB](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/20------LoveDA_create_vis_png.ipynb)
+  * [crop](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/21------LoveDA_crop_images.ipynb)
+* Potsdam & Vaihingen数据集
+  * [RGB2mask](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/23------Vaihingen_Potsdam_create_masks_png.ipynb)
+  * [crop](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/25------Vaihingen_Potsdam_crop_images.ipynb)
+### 一些小tools
+* [1 计算两张图像的CCA(多进程)](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/2.5-----%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%83%8F%E7%9A%84CCA%E5%A4%9A%E8%BF%9B%E7%A8%8B.py)
+* [2 根据CCA的计算结果生成数据集](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/3-------%E6%A0%B9%E6%8D%AECCA%E7%BB%93%E6%9E%9CCreate_Dataset.py)
+* [3 空洞填充去孔后处理](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/5-------%E7%A9%BA%E6%B4%9E%E5%A1%AB%E5%85%85%E5%8E%BB%E9%99%A4%E7%A9%BA%E9%9A%99.py) 
+* [4 Augumentor库增强后rename](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/6-------Augumentor_rename.py)
+* [5 24bit_to_8bit](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/8-------24bit_2_8bit.py)
+* [6 训练相关的](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/26------train_final.py)
+* [7 计算数据集的标准差](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/14------%E8%AE%A1%E7%AE%97%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E6%A0%87%E5%87%86%E5%B7%AE.ipynb)
+* [8 查看模型](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/10------%E6%9F%A5%E7%9C%8B%E6%A8%A1%E5%9E%8B.ipynb)
