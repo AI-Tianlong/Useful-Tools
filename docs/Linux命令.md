@@ -12,3 +12,11 @@ watch -n 0.1 ls -lh
 ```bash
 ln -s /HOME/scz5158/run/ATL/OpenMMLab/Dataset/cityscapes ./
 ```
+### 查看显存占用
+```bash
+watch -n 0.1 nvidia-smi
+```
+### 查看显存进程
+```bash
+fuser -v /nvidia*
+```
