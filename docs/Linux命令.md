@@ -18,5 +18,5 @@ watch -n 0.1 nvidia-smi
 ```
 ### 查看显存进程
 ```bash
-fuser -v /nvidia*
+fuser -v /dev/nvidia*
 ```
