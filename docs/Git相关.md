@@ -63,3 +63,11 @@ git config --global --unset http.https://github.com.proxy
 git config --global --unset https.https://github.com.proxy
 
 ```
+### 生成Github秘钥
+```bash
+ssh-keygen -t ed25519 -C "839290771@qq.com"
+```
+### 添加秘钥到ssh-agent
+```bash
+ssh-add ~/.ssh/id_ed25519
+```
