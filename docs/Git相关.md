@@ -1,14 +1,18 @@
 ## Git相关的命令
-
-### git clone 代理
-```bash
-git clone https://ghproxy.com/xxxxxxxxx
-```
 ### git clone 一个仓库
 
 ```bash
 git clone xxxxx
 ```
+### git clone 代理
+```bash
+git clone https://ghproxy.com/xxxxxxxxx
+```
+### 用代理clone后修改url
+```bash
+git remote --set-urls -add xxxxx
+```
+
 
 ### 添加上游仓库
 
