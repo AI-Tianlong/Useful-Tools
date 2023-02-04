@@ -20,3 +20,21 @@ watch -n 0.1 nvidia-smi
 ```bash
 fuser -v /dev/nvidia*
 ```
+### terminal忽略大小写补全
+编辑 vim ~/.inputrc 
+文件设置 (实测Ubuntu14是   /etc/.inputrc   文件)
+文件末尾添加如下代码:  
+```
+vim ~/.inputrc
+```
+```bash
+# do not show hidden files in the list
+set match-hidden-files off
+ 
+# auto complete ignoring case
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+```
