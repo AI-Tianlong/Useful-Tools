@@ -1,4 +1,10 @@
 ## Git相关的命令
+### 添加秘钥到ssh-agent
+[生成github秘钥](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
 ### git clone 一个仓库
 
 ```bash
@@ -67,8 +73,9 @@ git config --global --unset https.https://github.com.proxy
 ```bash
 ssh-keygen -t ed25519 -C "839290771@qq.com"
 ```
-### 添加秘钥到ssh-agent
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+
+### 连接github有问题？
+C:\Windows\System32\drivers\etc  在hosts里加
+```none
+199.232.68.133 raw.githubusercontent.com
 ```
