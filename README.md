@@ -13,7 +13,11 @@ Some Useful Tools Code
 * [Git相关的](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/Git%E7%9B%B8%E5%85%B3.md)
 
 * [超算相关的](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E8%B6%85%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9A%84.md)
-
+## 一些超好用的宝藏软件
+* 截图软件[Snipaste](https://www.snipaste.com/)
+* 图片查看[nomacs](https://nomacs.org/)
+* 录屏[OBS](https://obsproject.com/)
+* 画流程图[draw.io](https://draw.io)
 ## 一些写的很烂的code
 ### 数据集相关的
 * [创建cityscapes数据集](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/7-------%E5%88%9B%E5%BB%BAcityscapes%E6%95%B0%E6%8D%AE%E9%9B%86/)
