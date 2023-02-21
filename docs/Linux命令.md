@@ -38,3 +38,18 @@ set completion-ignore-case on
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 ```
+### VSCODE打开图片提示视图错误
+```bash
+#linux
+rm -rf ~/.config/Code/Cache
+
+#windows
+Go to the file explorer and to the path 
+C:\Users\<user_name>\AppData\Roaming\Code 
+and clear the contents of the folders Cache, 
+CachedData, CachedExtensions, CachedExtensionVSIXs 
+(if this folder exists) and Code Cache.
+
+#macos
+~/Library/Application Support/Code/
+```
