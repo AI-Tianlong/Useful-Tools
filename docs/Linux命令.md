@@ -53,3 +53,14 @@ CachedData, CachedExtensions, CachedExtensionVSIXs
 #macos
 ~/Library/Application Support/Code/
 ```
+
+
+参考https://blog.csdn.net/qq_40309341/article/details/121354666
+### ubuntu查看内存使用情况
+```bash
+free -mh 
+```
+### ubuntu查看硬盘使用情况
+```bash
+df -lh
+```
