@@ -1,4 +1,9 @@
 ## Linux常用命令  
+### Download and unzip
+```bash
+wget http://dags.stanford.edu/data/iccv09Data.tar.gz -O stanford_background.tar.gz
+tar xf stanford_background.tar.gz
+```
 ### unzip  
 ```bash
 unzip  -d 要解压缩到的文件夹路径 被解压的文件路径
