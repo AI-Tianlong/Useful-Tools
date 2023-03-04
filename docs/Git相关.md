@@ -15,11 +15,14 @@ ssh-add ~/.ssh/id_aitianlong
 
 ```bash
 git clone xxxxx
+# clone 指定的分支
+git clone -b dev-1.x https://github.com/open-mmlab/mmsegmentation.git 
 ```
 ### git clone 代理
 ```bash
 git clone https://ghproxy.com/xxxxxxxxx
 ```
+
 ### 用代理clone后修改url
 ```bash
 git remote --set-urls -add xxxxx
