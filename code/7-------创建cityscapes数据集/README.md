@@ -1,6 +1,6 @@
 ## 使用方式
 该程序的目标是生成如下格式的cityscapes数据集  
-```txt
+```none
 ├── data
 │   ├── cityscapes
 │   │   ├── leftImg8bit
