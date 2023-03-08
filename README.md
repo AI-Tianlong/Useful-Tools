@@ -19,6 +19,7 @@ Some Useful Tools Code
 * 图片查看[nomacs](https://nomacs.org/)
 * 录屏[OBS](https://obsproject.com/)
 * 画流程图[draw.io](https://draw.io)
+* 文本编辑[notepad++](https://notepad-plus-plus.org/downloads/)
 ## 一些写的很烂的code
 ### 数据集相关的
 * [创建cityscapes数据集](code/7-------%E5%88%9B%E5%BB%BAcityscapes%E6%95%B0%E6%8D%AE%E9%9B%86/)
