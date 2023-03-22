@@ -20,7 +20,7 @@ Some Useful Tools Code
 * 录屏[OBS](https://obsproject.com/)
 * 画流程图[draw.io](https://draw.io)
 * 文本编辑[notepad++](https://notepad-plus-plus.org/downloads/)
-## 一些写的很烂的code
+## 一些code
 ### 数据集相关的
 * [创建cityscapes数据集](code/7-------%E5%88%9B%E5%BB%BAcityscapes%E6%95%B0%E6%8D%AE%E9%9B%86/)
 * [创建mapillary数据集](code/8-------%E5%88%9B%E5%BB%BAmapillary%E6%95%B0%E6%8D%AE%E9%9B%86/)
@@ -33,6 +33,8 @@ Some Useful Tools Code
 * Potsdam & Vaihingen数据集
   * [RGB2mask](code/23------Vaihingen_Potsdam_create_masks_png.ipynb)
   * [crop](code/25------Vaihingen_Potsdam_crop_images.ipynb)
+* 扫描文件夹中的path
+  * [Path](code/path.py)
 ### 一些小tools
 * [1 计算两张图像的CCA(多进程)](code/2.5-----%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%83%8F%E7%9A%84CCA%E5%A4%9A%E8%BF%9B%E7%A8%8B.py)
 * [2 根据CCA的计算结果生成数据集](code/3-------%E6%A0%B9%E6%8D%AECCA%E7%BB%93%E6%9E%9CCreate_Dataset.py)
