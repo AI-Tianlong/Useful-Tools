@@ -18,21 +18,7 @@ for label_path in scandir(dataset_path, suffix='.png', recursive=True):
 import os
 import os.path as osp
 from pathlib import Path
-
-from .misc import is_str
-
-
-def is_filepath(x):
-    return is_str(x) or isinstance(x, Path)
-
-
-def fopen(filepath, *args, **kwargs):
-    if is_str(filepath):
-        return open(filepath, *args, **kwargs)
-    elif isinstance(filepath, Path):
-        return filepath.open(*args, **kwargs)
-    raise ValueError('`filepath` should be a string or a Path')
-
+from typing import List
 
 def check_file_exist(filename, msg_tmpl='file "{}" does not exist'):
     if not osp.isfile(filename):
@@ -96,37 +82,22 @@ def scandir(dir_path, suffix=None, recursive=False, case_sensitive=True):
     return _scandir(dir_path, suffix, recursive, case_sensitive)
 
 
-def find_vcs_root(path, markers=('.git', )):
-    """Finds the root directory (including itself) of specified markers.
+def find_data_list(img_root_path: str, suffix: str ='.jpg') -> List:
+    
+    """根据给定的数据集根目录，找出其子文件夹下
+    的所有符合后缀的数据集图片完整路径
 
-    Args:
-        path (str): Path of directory or file.
-        markers (list[str], optional): List of file or directory names.
-
-    Returns:
-        The directory contained one of the markers or None if not found.
     """
-    if osp.isfile(path):
-        path = osp.dirname(path)
+    print('\n==============================================================')
+    print('-- 正在读取数据集列表...')
 
-    prev, cur = None, osp.abspath(osp.expanduser(path))
-    while cur != prev:
-        if any(osp.exists(osp.join(cur, marker)) for marker in markers):
-            return cur
-        prev, cur = cur, osp.split(cur)[0]
-    return None
+    img_list = []
+    for img_name in scandir(img_root_path, suffix=suffix, recursive=True):
+        if suffix in img_name:
+            img_path = os.path.join(img_root_path, img_name)
+            img_list.append(img_path)
+    print(f'-- 共在 {img_root_path} 下寻找到图片 {len(img_list)} 张')
+
+    return img_list
 
 
-def is_abs(path: str) -> bool:
-    """Check if path is an absolute path in different backends.
-
-    Args:
-        path (str): path of directory or file.
-
-    Returns:
-        bool: whether path is an absolute path.
-    """
-    if osp.isabs(path) or path.startswith(('http://', 'https://', 's3://')):
-        return True
-    else:
-        return False
