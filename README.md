@@ -20,6 +20,7 @@ Some Useful Tools Code
 * 录屏[OBS](https://obsproject.com/)
 * 画流程图[draw.io](https://draw.io)
 * 文本编辑[notepad++](https://notepad-plus-plus.org/downloads/)
+* GitHub查看代码tree octotree
 
 ## VSCODE好用的插件
 - 自动补全文件夹路径 [Path Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete)
