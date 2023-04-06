@@ -30,7 +30,7 @@ def draw_label_type(img_root_path, dataset_type = 'train', colormap=colormap):
         # 读取图像文件
         draw_img = cv2.imread(image_whole_path)
         # 读取 labels
-        labels_file = read_csv(label_whole_path, header=None)
+        labels_file = read_csv(label_whole_path)
         labels = labels_file.values
 
         labels_img_path = labels[:, 0]

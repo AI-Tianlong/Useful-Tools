@@ -47,6 +47,7 @@ def create_ISAR_dateset(num_images = 2000, type = 'train', cover = False):
 
         # ------------------------------------- 嵌入图片 + 生成标签---------------------------------------
         with open(os.path.join(new_img_save_root_path, type, 'labels', str(i)+'.csv'), 'w+') as f:
+            f.write('filename, x1, y1, x2, y2, class\n')
             for j in index_list:    
                 img = np.array(Image.open(img_list[j]))  # 把要嵌入的图片读进来
                 img_height, img_width = img.shape[0], img.shape[1] # 要嵌入图片的高和宽
@@ -95,6 +96,11 @@ def create_ISAR_dateset(num_images = 2000, type = 'train', cover = False):
         Image.fromarray(new_img).save(os.path.join(new_img_save_root_path, type, 'images', str(i)+'.png'))
 
     print(f'-- 创建 {type} 数据集完成，共创建图像 {num_images} 张，位于{os.path.join(new_img_save_root_path, type)} \n')
+    with open(os.path.join(new_img_save_root_path, type, 'classes.txt'), 'w+') as f:
+        f.write('1 ZhanDouJi\n')
+        f.write('2 YunShuJi\n')
+        f.write('3 BaJi\n')
+        f.flush()
 
 def main():
     create_ISAR_dateset(num_images=num_train_images, type='train')
