@@ -14,7 +14,7 @@ Some Useful Tools Code
 
 * [超算相关的](docs/%E8%B6%85%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9A%84.md)
 * [数据集相关的](docs/%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9B%B8%E5%85%B3%E7%9A%84.md)
-* [给自己粘贴凸窗](docs/%E7%BB%99%E8%87%AA%E5%B7%B1%E7%B2%98%E8%B4%B4%E5%9B%BE%E5%BA%8A.md)
+* [给自己粘贴图床](docs/%E7%BB%99%E8%87%AA%E5%B7%B1%E7%B2%98%E8%B4%B4%E5%9B%BE%E5%BA%8A.md)
 ## 一些超好用的宝藏软件
 * 截图软件[Snipaste](https://www.snipaste.com/)
 * 图片查看[nomacs](https://nomacs.org/)
