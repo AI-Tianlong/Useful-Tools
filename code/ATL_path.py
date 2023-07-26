@@ -91,14 +91,14 @@ def find_data_list(img_root_path: str, suffix: str ='.jpg') -> List:
 
     """     
     print('--------------------------------------------------------------')
-    print(f'-- 正在读取数据集列表... {img_root_path} ')
+    print(f'-- 正在读取数据集列表... "{img_root_path}" ')
 
     img_list = []
     for img_name in scandir(img_root_path, suffix=suffix, recursive=True):
         if suffix in img_name:
             img_path = os.path.join(img_root_path, img_name)
             img_list.append(img_path)
-    print(f'-- 共在 {img_root_path} 下寻找到图片 {len(img_list)} 张')
+    print(f'-- 共在 "{img_root_path}" 下寻找到图片 {len(img_list)} 张')
     print('-------------------------------------------------------------')
     return sorted(img_list)
 
