@@ -1,4 +1,6 @@
 # Jetson AGX Orin 命令~
+[[常见问题解答1]](https://forums.developer.nvidia.com/t/jetson-agx-orin-faq/237459)  
+[[常见问题解答2]](https://forums.developer.nvidia.com/t/jetson-nano-faq/82953)
 ## 看内核版本
 ```bash
 uname -r
@@ -9,3 +11,13 @@ uname -r
 ```bash
 jtop
 ```
+## 查看所用的jetson linux内核版本
+```bash
+cat /etc/nv_tegra_release
+```
+## 查看所用的jetson 型号
+```bash
+cat /etc/nv_boot_control.conf
+```
+
+
