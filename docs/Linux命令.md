@@ -25,6 +25,14 @@ watch -n 0.1 nvidia-smi
 ```bash
 fuser -v /dev/nvidia*
 ```
+如果很多的话，查看其父进程
+```bash
+ps -ef|grep PID
+```
+然后通过`kill -9 {PPID}` 来杀死进程
+```bash
+kill -9 xxx
+```
 ### terminal忽略大小写补全
 编辑 vim ~/.inputrc 
 文件设置 (实测Ubuntu14是   /etc/.inputrc   文件)
