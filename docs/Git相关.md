@@ -9,7 +9,7 @@ ssh-keygen -t ed25519 -C "839290771@qq.com"
 ### 添加秘钥到ssh-agent
 ```bash
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_aitianlong
+ssh-add ~/.ssh/id_
 ```
 ### git clone 一个仓库
 
