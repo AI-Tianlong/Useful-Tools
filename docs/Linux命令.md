@@ -13,6 +13,21 @@ unzip  -d 要解压缩到的文件夹路径 被解压的文件路径
 ```bash
 watch -n 0.1 ls -lh
 ```
+### 删除文件夹
+```bash
+sudo rm -rf xxx
+```
+### 删除文件
+```none
+rm的选项有：
+-f, --force 强制删除，不需要确认
+-i 每删除一个文件或进入一个子目录都要求确认
+-I 在删除超过三个文件或者递归删除前要求确认
+-r, -R 递归删除子目录
+-d, --dir 删除空目录
+-v, --verbose 显示删除结果
+注意事项：需要谨慎使用rm删除命令，如果文件被删除，那么就不可以被恢复，若是没有使用- r选项，则rm命令不会删除目录。
+```
 ### 创建符号链接
 ```bash
 ln -s /HOME/scz5158/run/ATL/OpenMMLab/Dataset/cityscapes ./
