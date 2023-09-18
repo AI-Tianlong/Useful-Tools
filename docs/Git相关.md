@@ -14,9 +14,11 @@ ssh-add ~/.ssh/id_
 ### git clone 一个仓库
 
 ```bash
-git clone xxxxx
+git clone xxxxx --recursive
 # clone 指定的分支
-git clone -b dev-1.x https://github.com/open-mmlab/mmsegmentation.git 
+git clone -b dev-1.x https://github.com/open-mmlab/mmsegmentation.git
+# git 完之后cd xxx
+git submodule update --init
 ```
 ### git clone 代理
 ```bash
