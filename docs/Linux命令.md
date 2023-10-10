@@ -8,6 +8,10 @@ tar xf stanford_background.tar.gz
 ```bash
 unzip  -d 要解压缩到的文件夹路径 被解压的文件路径
 ```
+### tar -xzvf
+```bash
+tar -xzvf xxxxxxxx.tar.gz
+```
 ### Linux下查看文件的大小 (VSCODE中查看传输数据的多少)
 
 ```bash
