@@ -1,4 +1,9 @@
 ## Jupyter相关的问题
+### pip阿里镜像源
+```bash
+-i https://mirrors.aliyun.com/pypi/simple
+```
+
 ### conda 打包环境为tar.gz 并解压
 ```bash
 pip install conda-pack
@@ -8,6 +13,7 @@ conda pack -n openmmlab -o ATL-track.tar.gz --ignore-editable-packages #忽略`p
 mkdir ~/ananconda/envs/ATL-track
 tar -xf pcdet.tar.gz -C ~/ananconda/envs/ATL-track
 ```
+
 ### 给Jupyter notebook添加kernel
 
 ```bash
