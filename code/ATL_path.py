@@ -1,19 +1,30 @@
 
 """
+ATL_path
+========
+包含了 `mkdir_or_exist()`, `find_data_list()` 创建文件夹和寻找数据集名称两大函数
+
 用法：
-from ATL_path import scandir, mkdir_or_exist, find_data_list
-
-mkdir_or_exist(xxxx) # 创建文件夹, 存在则不创建
-find_data_list(img_root_path: str, suffix: str ='.jpg') # 寻找尾缀为'.jpg'的数据集列表
-
-for label_path in scandir(dataset_path, suffix='.png', recursive=True):
-    if 'labels' in label_path and 'labels_mask' not in label_path:
-        rgb_label_path = osp.join(dataset_path, label_path)
-        RGB_labels_path.append(rgb_label_path)
-        if 'v1.2' in label_path:
-            RGB_labels_v1_2_path.append(rgb_label_path)
-        elif 'v2.0' in label_path:
-            RGB_labels_v2_0_path.append(rgb_label_path)
+----
+    >>> # 在开头复制这一句
+    >>> from ATL_path import mkdir_or_exist, find_data_list, scandir
+    ________________________________________________________________
+    >>> # 示例1-创建文件夹：
+    >>> mkdir_or_exist(xxxx) # 创建文件夹, 存在则不创建
+    ________________________________________________________________
+    >>> # 示例2-寻找所有符合后缀文件夹名称(绝对路径):
+    >>> # 寻找尾缀为'.jpg'的数据集列表
+    >>> find_data_list(img_root_path: str, suffix: str ='.jpg') 
+    ________________________________________________________________
+    >>> # 示例3-寻找所有符合后缀文件夹名称:
+    >>> for label_path in scandir(dataset_path, suffix='.png', recursive=True):
+    >>>     if 'labels' in label_path and 'labels_mask' not in label_path:
+    >>>         rgb_label_path = osp.join(dataset_path, label_path)
+    >>>         RGB_labels_path.append(rgb_label_path)
+    >>>         if 'v1.2' in label_path:
+    >>>             RGB_labels_v1_2_path.append(rgb_label_path)
+    >>>         elif 'v2.0' in label_path:
+    >>>             RGB_labels_v2_0_path.append(rgb_label_path)
 
 """
 
@@ -101,5 +112,4 @@ def find_data_list(img_root_path: str, suffix: str ='.jpg') -> List:
     print(f'-- 共在 "{img_root_path}" 下寻找到图片 {len(img_list)} 张')
     print('-------------------------------------------------------------')
     return sorted(img_list)
-
 
