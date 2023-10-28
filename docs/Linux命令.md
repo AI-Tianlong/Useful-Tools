@@ -1,4 +1,13 @@
 ## Linux常用命令  
+### wget 和 curl 下载文件
+#### wget
+```bash
+wget "https://msravcghub.blob.core.windows.net/simmim-release/swinv2/pretrain/swinv2_giant_22k_500k.pth?se=2049-12-31&sp=r&sv=2022-11-02&sr=b&sig=aVSY0TZymdDvMLWm4Os1neOIlKR28Herw6o4hz2TqpI%3D" -O swinv2_giant_22k_500k.pth
+```
+#### curl
+```bash
+curl -o swinv2_giant_22k_500k.pth "https://msravcghub.blob.core.windows.net/simmim-release/swinv2/pretrain/swinv2_giant_22k_500k.pth?se=2049-12-31&sp=r&sv=2022-11-02&sr=b&sig=aVSY0TZymdDvMLWm4Os1neOIlKR28Herw6o4hz2TqpI%3D"
+```
 ### Download and unzip
 ```bash
 wget http://dags.stanford.edu/data/iccv09Data.tar.gz -O stanford_background.tar.gz
