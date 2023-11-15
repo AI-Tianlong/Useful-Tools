@@ -1,4 +1,11 @@
 ## Linux常用命令  
+## 查看文件夹的大小
+```bash
+du -hc
+
+sudo apt install ncdu
+ncdu 
+```
 ### wget 和 curl 下载文件
 #### wget
 ```bash
