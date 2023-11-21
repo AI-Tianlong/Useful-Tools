@@ -16,6 +16,15 @@ swa_name2 = 'swa_2.pth'
 swa_Final = 'swa_Final.pth'
 
 def swa(pth_name,swa_name):
+    """swa weight average
+    
+    Args:
+        pth_name (str): pth name, split by '@'
+        swa_name (str): swa name
+        
+    Save:
+        swa.pth
+    """
 
     pth_list = pth_name.split("@")
 
