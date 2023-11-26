@@ -31,6 +31,8 @@ Some Useful Tools Code
 
 ## 一些code
 ### 数据集相关的
+* [RGB2mask.py](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/0-------RGB2mask.py)
+* [mask2RGB.py](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/0-------mask2RGB.py)
 * [创建cityscapes数据集](code/7-------%E5%88%9B%E5%BB%BAcityscapes%E6%95%B0%E6%8D%AE%E9%9B%86/)
 * [创建mapillary数据集](code/8-------%E5%88%9B%E5%BB%BAmapillary%E6%95%B0%E6%8D%AE%E9%9B%86/)
 * GID数据集
