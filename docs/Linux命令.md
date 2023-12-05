@@ -14,12 +14,12 @@ scp -r -P 60001  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/ ./
 3. 上传文件到服务器
 ```bash
 #scp -P 端口号 {本地目录} user@ip地址:{远程目录} 
-scp ./ATL.zip -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip 
+scp -P 60001 ./ATL.zip  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip 
 ```
 4. 上传文件夹到服务器
 ```bash
 #scp -P 端口号 -r {本地目录}  user@ip地址:{远程目录} 
-scp ./ -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/
+scp -P 60001 ./  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/
 ```
 ## 查看当前文件夹的挂载点
 ```bash
