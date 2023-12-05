@@ -8,7 +8,7 @@ scp -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.
 2. 从服务器上下载文件夹
 ```bash
 #scp -r -P 端口号  user@ip地址:{远程目录} {本地目录}
-scp -r -P 60001  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip ./
+scp -r -P 60001  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/ ./
 ```
 3. 上传文件到服务器
 ```bash
@@ -18,7 +18,7 @@ scp ./ATL.zip -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_tra
 4. 上传文件夹到服务器
 ```bash
 #scp -r {本地目录} -P 端口号 user@ip地址:{远程目录} 
-scp ./ATL.zip -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip 
+scp ./ -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/
 ```
 ## 查看当前文件夹的挂载点
 ```bash
