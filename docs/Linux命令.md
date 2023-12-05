@@ -1,4 +1,25 @@
 ## Linux常用命令  
+## 两台服务器传输文件
+1. 从服务器上下载文件
+```bash
+#scp -P 端口号 user@ip地址:{远程目录} {本地目录}
+scp -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip ./
+```
+2. 从服务器上下载文件夹
+```bash
+#scp -r -P 端口号  user@ip地址:{远程目录} {本地目录}
+scp -r -P 60001  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip ./
+```
+3. 上传文件到服务器
+```bash
+#scp {本地目录} -P 端口号 user@ip地址:{远程目录} 
+scp ./ATL.zip -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip 
+```
+4. 上传文件夹到服务器
+```bash
+#scp -r {本地目录} -P 端口号 user@ip地址:{远程目录} 
+scp ./ATL.zip -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip 
+```
 ## 查看当前文件夹的挂载点
 ```bash
 df -h .
