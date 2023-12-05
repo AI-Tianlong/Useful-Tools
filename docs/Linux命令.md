@@ -1,5 +1,6 @@
 ## Linux常用命令  
 ## 两台服务器传输文件
+端口号 -P 要放在前面，不然提示没有权限
 1. 从服务器上下载文件
 ```bash
 #scp -P 端口号 user@ip地址:{远程目录} {本地目录}
@@ -12,12 +13,12 @@ scp -r -P 60001  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/ ./
 ```
 3. 上传文件到服务器
 ```bash
-#scp {本地目录} -P 端口号 user@ip地址:{远程目录} 
+#scp -P 端口号 {本地目录} user@ip地址:{远程目录} 
 scp ./ATL.zip -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_trainvaltest.zip 
 ```
 4. 上传文件夹到服务器
 ```bash
-#scp -r {本地目录} -P 端口号 user@ip地址:{远程目录} 
+#scp -P 端口号 -r {本地目录}  user@ip地址:{远程目录} 
 scp ./ -P 60001 xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/
 ```
 ## 查看当前文件夹的挂载点
