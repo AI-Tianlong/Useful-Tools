@@ -19,7 +19,7 @@ scp -P 60001 ./ATL.zip  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/leftImg8bit_tr
 4. 上传文件夹到服务器
 ```bash
 #scp -P 端口号 -r {本地目录}  user@ip地址:{远程目录} 
-scp -P 60001 ./  xxxx@xxxx:AI-Tianlong/Datasets/cityscapes/
+cp -P 1530 -r  imagenet/ user@10.70.5.32:/opt/AI-Tianlong/Datasets/imagenet
 ```
 ## 查看当前文件夹的挂载点
 ```bash
