@@ -1,7 +1,10 @@
 ## Linux常用命令  
 ## 记录终端的输出
 ```bash
-script output_file.txt
+# 开始记录
+script output_file.log
+# 结束保存
+script end
 ```
 ## 两台服务器传输文件 这速率老快了100MB/s
 端口号 -P 要放在前面，不然提示没有权限
