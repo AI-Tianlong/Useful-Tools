@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 from tqdm import tqdm, trange
-from ATL_Tools import mkdir_or_exist, find_data_list, scandir
+from ATL_Tools import mkdir_or_exist, find_data_list
 import os
 
 RGB_path = 'dataset/potsdam/RGB_labels'
