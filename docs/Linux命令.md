@@ -1,4 +1,9 @@
-## Linux常用命令  
+## Linux常用命令 
+## 停止桌面服务
+```bash
+service gdm3 stop
+service gdm3 start
+```
 ## 记录终端的输出
 ```bash
 # 开始记录
