@@ -11,6 +11,7 @@ Some Useful Tools Code
 * [ATL_Path.py](code/0-------ATL_path.py)
 * [给自己粘贴图床](docs/%E7%BB%99%E8%87%AA%E5%B7%B1%E7%B2%98%E8%B4%B4%E5%9B%BE%E5%BA%8A.md)
 * [Jupyter相关的](docs/Jupyter%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)
+* [发布自己的库到pypi](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BA%93%E5%88%B0pypi.md)
 * [超算相关的](docs/%E8%B6%85%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9A%84.md)
 * [数据集相关的](docs/%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9B%B8%E5%85%B3%E7%9A%84.md)
 * [好玩的大模型](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E5%A5%BD%E7%8E%A9%E7%9A%84%E5%A4%A7%E6%A8%A1%E5%9E%8B.md)
