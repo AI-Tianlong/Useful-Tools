@@ -1,4 +1,14 @@
 ## Linux常用命令 
+## 查看系统信息
+```bash
+lsb_release -a
+```
+# 查看cpu的信息
+```bash
+cat /proc/cpuinfo
+lscpu
+cat /proc/cpuinfo | grep "model name"
+```
 ## 停止桌面服务
 ```bash
 service gdm3 stop
