@@ -11,6 +11,11 @@ ssh-keygen -t ed25519 -C "839290771@qq.com"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_
 ```
+### 如果是第一次用git 设置用户信息
+```bash
+git config --global user.name "AI-Tianlong"
+git config --global user.email  "xxxxxxxx@qq.com"
+```
 ### docker的命令
 - 帮助命令
   ```bash
