@@ -1,4 +1,5 @@
 ## Linux常用命令 
+
 ## 查看系统信息
 ```bash
 lsb_release -a
@@ -20,7 +21,14 @@ service gdm3 start
 script output_file.log
 # 结束保存
 script end
+
+nvidia-smi > atl.log
 ```
+## 寻找文件
+
+![image](https://github.com/AI-Tianlong/Useful-Tools/assets/50650583/8ccbe8b0-171f-4eca-8cf9-236d1c1d2b30)
+
+
 ## 两台服务器传输文件 这速率老快了100MB/s
 端口号 -P 要放在前面，不然提示没有权限
 1. 从服务器上下载文件
