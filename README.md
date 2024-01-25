@@ -39,6 +39,7 @@ Some Useful Tools Code
 > * [裁切大图为小图进行推理](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/0-------crop_patch_to_inference.py) 使用gdal裁切大图为小图
 > * [合并推理后的小mask为大mask](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/0-------hebing_inference_to_big_mask.py) 使用gdal合并小的推理结果为大图
 > * [mask2RGB并添加坐标信息](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/0-------mask2RGB_add_meta.py) 使用gdal转化mask为RGB并添加坐标信息
+> * [合并24标签为12标签](https://github.com/AI-Tianlong/Useful-Tools/blob/main/code/0-------convert_24classes_to12.py) 使用gdal转化mask为RGB并添加坐标信息
 * [创建cityscapes数据集](code/7-------%E5%88%9B%E5%BB%BAcityscapes%E6%95%B0%E6%8D%AE%E9%9B%86/)
 * [创建mapillary数据集](code/8-------%E5%88%9B%E5%BB%BAmapillary%E6%95%B0%E6%8D%AE%E9%9B%86/)
 * GID数据集
