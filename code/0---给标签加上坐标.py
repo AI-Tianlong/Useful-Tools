@@ -1,18 +1,34 @@
+import numpy as np
+from PIL import Image
+from tqdm import tqdm, trange
 from ATL_Tools import mkdir_or_exist, find_data_list
+import os
+import tiffile as tif
 from osgeo import gdal
-import numpy as np 
+
+from PIL import Image
+Image.MAX_IMAGE_PIXELS = None
+
+IMG_path = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/images_3channel'
+RGB_path = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/Harbin_big_labels_RGB'
+
+img_lists = find_data_list(IMG_path, suffix='.tif')
+
+for img_path in tqdm(img_lists):
+    img_basename = os.path.basename(img_path)
+
+    img_gdal_ori = gdal.Open(img_path, gdal.GA_ReadOnly)
+    img_gdal_label = gdal.Open(os.path.join(RGB_path, os.path.basename(img_path).replace('.tif', '.png')))
 
 
-image_paths = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/images_3channel'
-label_paths = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/labels'
+    trans = img_gdal_ori.GetGeoTransform()
+    proj = img_gdal_ori.GetProjection()
 
-img_lists = find_data_list(image_paths, suffix='.tif')
-label_lists = find_data_list(label_paths, suffix='.tif')
+    img_gdal_label.SetGeoTransform(trans)
+    img_gdal_label.SetProjection(proj)
 
-for image_path, label_path in zip(data_list, label_list):
-    image = gdal.Open(image_path,  gdal.GA_ReadOnly)
-    label = gdal.Open(label_path,  gdal.GA_ReadOnly)
+    output_path = img_path
+    gdal.Warp(output_path, img_gdal_label)
 
-    img_trans = image.GetGeoTransform()
-    img_proj = image.GetProjection()
-    
+    img_gdal_ori = None
+    img_gdal_label = None
