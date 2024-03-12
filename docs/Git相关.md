@@ -26,7 +26,7 @@ git config --global user.email  "xxxxxxxx@qq.com"
 - docker 下载镜像
   ```bash
   docker pull mmseg:[版本，不写默认最新]
-  
+
 - 镜像命令
   ```bash
   docker images # 查看所有镜像
@@ -50,6 +50,7 @@ git config --global user.email  "xxxxxxxx@qq.com"
   dpcker run -it ATL1 /bin/bash
   ==> exit （退出）从容器中返回主机
   ==> P+Q+ctrl 容器不停止退出
+  sudo docker run --gpus all --shm-size=30g -it atl-mseg:latest
   ```
 - 查看所有运行的容器
   ```bash
