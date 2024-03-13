@@ -51,6 +51,7 @@ git config --global user.email  "xxxxxxxx@qq.com"
   ==> exit （退出）从容器中返回主机
   ==> P+Q+ctrl 容器不停止退出
   sudo docker run --gpus all --shm-size=30g -it atl-mseg:latest
+  docker exec -it 00b08fbae5cf /bin/bash
   ```
 - 查看所有运行的容器
   ```bash
