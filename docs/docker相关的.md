@@ -34,7 +34,7 @@
   docker build -t {镜像名字}:{tag} ./
   ```
   ```bash
-  docker run --gpus all --shm-size=8g -it -v {DATA_DIR}:/mmsegmentation/data {镜像名字}:{tag}
+  docker run --gpus all --shm-size=50g -it -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/input_path:/input_path -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/output_path:/output_path atl-mmseg-water:v1
   ```
   ```Dockerfile
   FROM atl-mmseg-water:latest
