@@ -28,6 +28,27 @@
                           -p ip:主机端口:容器端口
   -P（大写） 随即指定端口
   ```
+- Docerfile 创建镜像
+  ```bash
+  FROM atl-mmseg-water:latest
+  
+  ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0+PTX"
+  ENV TORCH_NVCC_FLAGS="-Xfatbin -compress-all"
+  ENV CMAKE_PREFIX_PATH="$(dirname $(which conda))/../"
+  
+  # To fix GPG key error when running apt-get update
+  RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+  RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub
+  
+  RUN apt-get update && apt-get install -y git ninja-build libglib2.0-0 libsm6 libxrender-dev libxext6 libgl1-mesa-dev  \
+      && apt-get clean \
+      && rm -rf /var/lib/apt/lists/*
+  
+  COPY /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/workspace /workspace
+  WORKDIR /workspace
+  CMD ["/bin/bash", "run.sh"]
+
+  ```
 - 交互式进入docker
   ```bash
   dpcker run -it ATL1 /bin/bash
