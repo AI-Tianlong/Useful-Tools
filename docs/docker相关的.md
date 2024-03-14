@@ -1,4 +1,4 @@
-# docker的命令
+# Docker的命令
 - 帮助命令
   ```bash
   docker version # 显示版本信息
@@ -19,21 +19,21 @@
 - 创建容器，有了镜像才能创建容器实例
   ```bash
   docker run [可选参数] image
+  docker run --gpus all --shm-size=30g -it mmseg:[版本，不写默认最新]
   --name="ATL1" "ATL2"# 用来区分容器
   -d 后台方式运行
   -it 使用交互方式运行，进入容器查看内容
   -p（小写）指定容器的端口 -p 主机端口:容器端口 可和主机映射
-                        -p 容器端口
-                        -p ip:主机端口:容器端口
+                          -p 容器端口
+                          -p ip:主机端口:容器端口
   -P（大写） 随即指定端口
   ```
 - 交互式进入docker
   ```bash
   dpcker run -it ATL1 /bin/bash
+  docker exec -it 00b08fbae5cf /bin/bash
   ==> exit （退出）从容器中返回主机
   ==> P+Q+ctrl 容器不停止退出
-  sudo docker run --gpus all --shm-size=30g -it atl-mseg:latest
-  docker exec -it 00b08fbae5cf /bin/bash
   ```
 - 查看所有运行的容器
   ```bash
