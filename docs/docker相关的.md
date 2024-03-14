@@ -29,7 +29,7 @@
   -P（大写） 随即指定端口
   ```
 - Docerfile 创建镜像
-  ```bash
+  ```Dockerfile
   FROM atl-mmseg-water:latest
   
   ENV TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0+PTX"
