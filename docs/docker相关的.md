@@ -51,7 +51,7 @@
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
   
-  COPY /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/workspace /workspace
+  COPY . /workspace
   WORKDIR /workspace
   CMD ["/bin/bash", "run.sh"]
   ```
