@@ -19,7 +19,7 @@
 - 创建容器，有了镜像才能创建容器实例
   ```bash
   docker run [可选参数] image
-  docker run --gpus all --shm-size=30g -it mmseg:[版本，不写默认最新]
+  docker run --gpus all --shm-size=40g -it --name atl-mmseg  8a2cd2aba91f
   --name="ATL1" "ATL2"# 用来区分容器
   -d 后台方式运行
   -it 使用交互方式运行，进入容器查看内容
