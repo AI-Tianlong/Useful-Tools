@@ -29,6 +29,13 @@
   -P（大写） 随即指定端口
   ```
 - Docerfile 创建镜像
+  ```bash
+  # 切换到Dockerfile所在的路径
+  docker build -t {镜像名字}:{tag} ./
+  ```
+  ```bash
+  docker run --gpus all --shm-size=8g -it -v {DATA_DIR}:/mmsegmentation/data {镜像名字}:{tag}
+  ```
   ```Dockerfile
   FROM atl-mmseg-water:latest
   
@@ -47,7 +54,6 @@
   COPY /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/workspace /workspace
   WORKDIR /workspace
   CMD ["/bin/bash", "run.sh"]
-
   ```
 - 交互式进入docker
   ```bash
