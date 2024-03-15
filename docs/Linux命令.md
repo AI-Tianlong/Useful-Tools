@@ -1,5 +1,4 @@
 ## Linux常用命令 
-
 ## 查看系统信息
 ```bash
 lsb_release -a
@@ -147,6 +146,8 @@ set completion-ignore-case on
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 ```
+### VSCODE通过秘钥 ssh 服务器
+https://zhuanlan.zhihu.com/p/497462191
 ### VSCODE打开图片提示视图错误
 ```bash
 #linux
