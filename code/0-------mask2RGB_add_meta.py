@@ -7,13 +7,13 @@ from osgeo import gdal
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
 
-MASK_path = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/Harbin_big_labels'
-RGB_path = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/Harbin_big_labels_RGB'
+MASK_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/5billion-S2/inference_result_mask'
+RGB_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/5billion-S2/inference_result_RGB'
 
-IMG_path = '/opt/AI-Tianlong/Datasets/ATL_DATASETS/Harbin/images_3channel'
+IMG_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/5billion-S2/Big-image/images-origin'
 mkdir_or_exist(RGB_path)
 
-label_lists = find_data_list(MASK_path, suffix='.tif')
+label_lists = find_data_list(MASK_path, suffix='.png')
 
 # 思路：三个通道分别乘 2 3 4，然后相加，得到一个新的通道，然后根据这个通道的值，来判断是哪个类别
 
@@ -58,7 +58,7 @@ for mask_label_path in tqdm(label_lists, colour='Green'):
     h,w = mask_label.shape
 
     RGB_label = new_palette[mask_label]
-    output_path = os.path.join(RGB_path, os.path.basename(mask_label_path))
+    output_path = os.path.join(RGB_path, os.path.basename(mask_label_path).replace('.png', '.tif'))
 
     driver = gdal.GetDriverByName('GTiff')
     RGB_label_gdal = driver.Create(output_path, w, h, 3, gdal.GDT_Byte)
@@ -68,7 +68,7 @@ for mask_label_path in tqdm(label_lists, colour='Green'):
     RGB_label_gdal.GetRasterBand(3).WriteArray(RGB_label[:,:,2])
 
     if add_meta_info:
-        IMG_gdal = gdal.Open(os.path.join(IMG_path, os.path.basename(mask_label_path).replace('.tif', '.tif')), gdal.GA_ReadOnly)
+        IMG_gdal = gdal.Open(os.path.join(IMG_path, os.path.basename(mask_label_path).replace('.png', '.tif')), gdal.GA_ReadOnly)
 
         trans = IMG_gdal.GetGeoTransform()
         proj = IMG_gdal.GetProjection()
