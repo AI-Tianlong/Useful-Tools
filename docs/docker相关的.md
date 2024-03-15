@@ -34,7 +34,12 @@
   docker build -t {镜像名字}:{tag} ./
   ```
   ```bash
+  # 创建容器
   docker run --gpus all --shm-size=50g -it -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/input_path:/input_path -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/output_path:/output_path atl-mmseg-water:v1
+  ```
+  ```bash
+  # 往容器里写入CMD并commit为镜像
+  docker commit -c 'CMD ["/bin/bash", "run.sh"]' <container_id_or_name> <new_image_name>
   ```
   ```Dockerfile
   FROM atl-mmseg-water:latest
