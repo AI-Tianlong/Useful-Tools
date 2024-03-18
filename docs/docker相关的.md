@@ -43,7 +43,7 @@
   ```
   ```bash
   # 往容器里写入CMD并commit为镜像
-  docker commit -c 'CMD ["/bin/bash", "run.sh"]' <container_id_or_name> <new_image_name>
+  docker commit -c 'CMD ["python", "run.py","/input_path","/output_path"]' <container_id_or_name> <new_image_name>
   ```
   ```Dockerfile
   FROM atl-mmseg-water:latest
