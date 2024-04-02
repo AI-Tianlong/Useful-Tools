@@ -4,21 +4,21 @@ Some Useful Tools Code
 给自己备份以便将来之需。  
 
 ## 一些常用的命令
-* [Linux命令](docs/Linux%E5%91%BD%E4%BB%A4.md)
+* [Linux命令](docs/Linux命令.md)
 * [markdown语法]()
-* [Git相关的](docs/Git%E7%9B%B8%E5%85%B3.md)
+* [Git相关的](docs/Git相关.md)
 * [Docker相关的](docs/docker相关的.md)
 * [给自己粘贴图床](docs/%E7%BB%99%E8%87%AA%E5%B7%B1%E7%B2%98%E8%B4%B4%E5%9B%BE%E5%BA%8A.md)
-* [发布自己的库到pypi](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E5%BA%93%E5%88%B0pypi.md)
+* [发布自己的库到pypi](docs/发布自己的库到pypi.md)
 * [QGIS 使用技巧相关](docs/QGIS使用相关的.md)
-* [Jetson AGX Orin 命令](docs/Jetson-AGX-Orin命令.md)
+* [Jetson AGX Orin 命令](docs/Jetson%20AGX%20Orin命令.md)
 * [ATL_Path.py](code/0-------ATL_path.py)
-* [Conda相关的](docs/Conda%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98.md)
-* [超算相关的](docs/%E8%B6%85%E7%AE%97%E7%9B%B8%E5%85%B3%E7%9A%84.md)
-* [数据集相关的](docs/%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9B%B8%E5%85%B3%E7%9A%84.md)
-* [好玩的大模型](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E5%A5%BD%E7%8E%A9%E7%9A%84%E5%A4%A7%E6%A8%A1%E5%9E%8B.md)
-* [文章的Note](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/%E6%96%87%E7%AB%A0%E7%9A%84Note.md)
-* [Chrome翻译问题](docs/Chrome%E7%BF%BB%E8%AF%91%E9%97%AE%E9%A2%98.md)
+* [Conda相关的](docs/Conda相关问题.md)
+* [超算相关的](docs/超算相关的.md)
+* [数据集相关的](docs//数据集相关的.md)
+* [好玩的大模型](docs/好玩的大模型.md)
+* [文章的Note](docs/文章的Note.md)
+* [Chrome翻译问题](docs/Chrome翻译问题.md)
   
 ## 一些超好用的宝藏软件
 * 截图软件[Snipaste](https://www.snipaste.com/)
