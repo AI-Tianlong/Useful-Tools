@@ -7,7 +7,7 @@
 pip install setuptools build twine
 ```
 ## 2 准备打包的文件
-按照图示准备
+按照图示准备  
 ![image](https://github.com/AI-Tianlong/Useful-Tools/assets/50650583/60634c8e-6ce3-41b0-96d3-366f249abc73)
 
 ### 2.1 准备 pyproject.toml
