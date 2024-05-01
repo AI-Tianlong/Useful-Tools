@@ -1,3 +1,34 @@
+## 给VSCODE 添加 Gitbash 终端
+`ctrl + shift + P`打开VSCODE设置（json）  
+添加以下代码：
+```txt
+"terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "path": "D:/Applications/Git/Git/bin/bash.exe",
+            "args": []
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash"
+```
+## VSCODE中的Gitbash 自动激活 conda环境
+```bash
+vim ~/.bashrc
+```
+```
+source D:/Applications/miniconda/miniconda/Scripts/activate openmmlab
+```
 ## Jupyter相关的问题
 ### pip阿里镜像源
 ```bash
