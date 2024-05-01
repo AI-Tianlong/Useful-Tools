@@ -6,6 +6,8 @@
 ```bash
 ssh-keygen -t ed25519 -C "839290771@qq.com"
 ```
+### 添加秘钥到github
+[添加秘钥到github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
 ### 添加秘钥到ssh-agent
 ```bash
 eval "$(ssh-agent -s)"
