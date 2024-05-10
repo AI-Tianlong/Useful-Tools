@@ -39,7 +39,7 @@
   ```
   ```bash
   # 如果容器有启动命令,加上/bin/bash
-  docker run --gpus all --shm-size=50g -it -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/input_path:/input_path -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/output_path:/output_path atl-mmseg-water:v1 /bin/bash
+  docker run --gpus all --shm-size=50g -it -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/input_path:/input_path -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/output_path:/output_path registry.cn-hangzhou.aliyuncs.com/mask2former/atl-mmseg:cuda-11.6-v11
   ```
   ```bash
   # 往容器里写入CMD并commit为镜像
