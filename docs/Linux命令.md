@@ -88,6 +88,15 @@ unzip  -d 要解压缩到的文件夹路径 被解压的文件路径
 ```bash
 tar -xzvf xxxxxxxx.tar.gz
 ```
+要使用tar命令解压缩文件到一个新文件夹，可以使用以下命令：
+```bash
+mkdir new_folder
+tar -xf archive.tar -C new_folder
+```
+这里，mkdir new_folder 创建一个名为new_folder的新文件夹，tar -xf archive.tar -C new_folder 将archive.tar文件解压到这个新文件夹中。
+- -x 表示解压缩。
+- -f 指定文件名。
+- -C 指定解压缩到的目录。
 ### Linux下查看文件的大小 (VSCODE中查看传输数据的多少)
 
 ```bash
