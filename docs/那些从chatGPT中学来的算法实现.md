@@ -13,3 +13,17 @@ x_tiles, y_tiles
 ```python
 (3, 2)
 ```
+## 2 大图切割小图，有重叠，并保留不足5000的小图
+```python
+width=10001
+height=10000
+title_size = 5000
+step_size=title_size-500
+x_tiles = (width + step_size - 1) // step_size
+y_tiles = (height + step_size - 1) // step_size
+x_tiles,y_tiles
+```
+输出：
+```python
+(3, 3)
+```
