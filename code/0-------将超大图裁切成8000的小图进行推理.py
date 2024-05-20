@@ -19,7 +19,7 @@ def parse_args():
         '--crop_size',
         type=int,
         help='clipped size of image after preparation',
-        default=8000)
+        default=5000)
     args = parser.parse_args()
     return args
 
@@ -33,7 +33,8 @@ def clip_big_image(image_path, save_path, crop_size=8000):
     # whose size are all 512x512.
 
     #====================
-    img_bit = gdal.GDT_Byte
+    img_gdal = gdal.Open(image_path)
+    img_bit = img_gdal.GetRasterBand(1).DataType
 
     img_basename = osp.basename(image_path).split('.')[0] #nangangqu.tif
     
