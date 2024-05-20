@@ -8,6 +8,7 @@ Some Useful Tools Code
 * [markdown语法]()
 * [Git相关的](docs/Git相关.md)
 * [Docker相关的](docs/docker相关的.md)
+* [那些从chatGPT中学来的算法实现](/docs/%E9%82%A3%E4%BA%9B%E4%BB%8EchatGPT%E4%B8%AD%E5%AD%A6%E6%9D%A5%E7%9A%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0.md)
 * [给自己粘贴图床](docs/%E7%BB%99%E8%87%AA%E5%B7%B1%E7%B2%98%E8%B4%B4%E5%9B%BE%E5%BA%8A.md)
 * [发布自己的库到pypi](docs/发布自己的库到pypi.md)
 * [QGIS 使用技巧相关](docs/QGIS使用相关的.md)
