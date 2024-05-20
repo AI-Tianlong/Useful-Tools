@@ -17,8 +17,9 @@ x_tiles, y_tiles
 ```python
 width=10001
 height=10000
+overlap = 500
 title_size = 5000
-step_size=title_size-500
+step_size=title_size-overlap
 x_tiles = (width + step_size - 1) // step_size
 y_tiles = (height + step_size - 1) // step_size
 x_tiles,y_tiles
