@@ -60,7 +60,7 @@ def main():
         for patch_path in path_img_merge_list:
             if os.path.basename(patch_path).split('.')[0] == img_basename_no_suffix:
                 print(f'小图没有序号后缀, {img_basename} 有边长小于 {crop_size}, 未进行裁切, 不需要合并')
-                pass
+                new_big_img = np.array(Image.open(patch_path))
             else: 
                 img_patch = np.array(Image.open(patch_path))
             
