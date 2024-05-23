@@ -55,35 +55,32 @@ def main():
         for img_patch_path in img_patch_list:
             if img_basename_no_suffix in img_patch_path:
                 path_img_merge_list.append(img_patch_path)
-            
-
+        print(f'符合{img_basename_no_suffix}的有 {len(path_img_merge_list)} 张')
 
         for patch_path in path_img_merge_list:
-
             if os.path.basename(patch_path).split('.')[0] == img_basename_no_suffix:
                 print(f'小图没有序号后缀, {img_basename} 有边长小于 {crop_size}, 未进行裁切, 不需要合并')
                 pass
-
             else: 
-                img_patch = np.array(Image.open(img_patch_path))
+                img_patch = np.array(Image.open(patch_path))
             
                 # 处理左上的
-                if (not 'xia' in img_patch_path) and (not 'you' in img_patch_path) and (not 'youxia' in img_patch_path):
-                    img_h = int(os.path.basename(img_patch_path).split('_')[-3]) # [1]
-                    img_w = int(os.path.basename(img_patch_path).split('_')[-2]) # [2]
+                if (not 'xia' in patch_path) and (not 'you' in patch_path) and (not 'youxia' in patch_path):
+                    img_h = int(os.path.basename(patch_path).split('_')[-3]) # [1]
+                    img_w = int(os.path.basename(patch_path).split('_')[-2]) # [2]
                     new_big_img[img_h*crop_size:img_h*crop_size+crop_size, img_w*crop_size:img_w*crop_size+crop_size] = img_patch
                 
                 # 处理右的
-                elif (not 'youxia' in img_patch_path) and ('xia' in img_patch_path):
-                    img_w = int(os.path.basename(img_patch_path).split('_')[-2]) # [2]
+                elif (not 'youxia' in patch_path) and ('xia' in patch_path):
+                    img_w = int(os.path.basename(patch_path).split('_')[-2]) # [2]
                     new_big_img[h-crop_size:h, img_w*crop_size:img_w*crop_size+crop_size] = img_patch
 
                 # 处理下的
-                elif (not 'youxia' in img_patch_path) and ('you' in img_patch_path):
-                    img_h = int(os.path.basename(img_patch_path).split('_')[-2]) # [2]
+                elif (not 'youxia' in patch_path) and ('you' in patch_path):
+                    img_h = int(os.path.basename(patch_path).split('_')[-2]) # [2]
                     new_big_img[img_h*crop_size:img_h*crop_size+crop_size,w-crop_size:w] = img_patch
 
-                elif 'youxia' in img_patch_path:
+                elif 'youxia' in patch_path:
                     new_big_img[h-crop_size:h,w-crop_size:w] = img_patch
 
         Image.fromarray(new_big_img).save(os.path.join(img_big_path, img_basename_no_suffix + '.png'))
