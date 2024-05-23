@@ -12,9 +12,11 @@ from ATL_Tools import mkdir_or_exist, find_data_list
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Convert potsdam dataset to mmsegmentation format')
-    parser.add_argument('dataset_path', help='potsdam folder path')
-    parser.add_argument('--tmp_dir', help='path of the temporary directory')
-    parser.add_argument('-o', '--out_dir', help='output path')
+    parser.add_argument('-d', '--dataset_path', help='potsdam folder path', 
+                        default='../要推理的images-矢量裁切/')
+    parser.add_argument('-t', '--tmp_dir', help='path of the temporary directory')
+    parser.add_argument('-o', '--out_dir', help='output path',
+                        default='../要推理的images-矢量裁切-小图/')
     parser.add_argument(
         '--crop_size',
         type=int,
@@ -57,66 +59,68 @@ def clip_big_image(image_path, save_path, crop_size=8000):
             band.WriteArray(img[:, :, band_num])
         return None
     
-    hang = h - (h//crop_size)*crop_size
-    lie =  w - (w//crop_size)*crop_size
-    print(f'图像尺寸：{img.shape}')
-    print(f'可裁成{h//crop_size+1}行...{hang}')
-    print(f'可裁成{w//crop_size+1}列...{lie}')
-    print(f'共{crop_size}：{((h//crop_size+1)*(w//crop_size+1))+1}张')
+    else:
+    
+        hang = h - (h//crop_size)*crop_size
+        lie =  w - (w//crop_size)*crop_size
+        print(f'图像尺寸：{img.shape}')
+        print(f'可裁成{h//crop_size+1}行...{hang}')
+        print(f'可裁成{w//crop_size+1}列...{lie}')
+        print(f'共{crop_size}：{((h//crop_size+1)*(w//crop_size+1))+1}张')
 
-    # 8000的部分 xxxxx._0_0_8000.tif
-    for i in range(h//crop_size):
+        # 8000的部分 xxxxx._0_0_8000.tif
+        for i in range(h//crop_size):
+            for j in range(w//crop_size):
+                out_path = os.path.join(save_path, img_basename+'_'+str(i)+'_'+str(j)+'_'+str(crop_size)+'.tif')
+                Driver = gdal.GetDriverByName("Gtiff")
+
+                new_512 = np.zeros((crop_size,crop_size, c),dtype=np.uint8)
+                new_img = Driver.Create(out_path, crop_size, crop_size, c, img_bit)
+            
+                new_512 = img[i*crop_size:i*crop_size+crop_size,j*crop_size:j*crop_size+crop_size,:]   #横着来       
+
+                for band_num in range(bands):
+                    band = new_img.GetRasterBand(band_num + 1)
+                    band.WriteArray(new_512[:, :, band_num])
+
+        #以外的部分
+
+        # 下边的 xxxxx._xia_0_8000.tif
         for j in range(w//crop_size):
-            out_path = os.path.join(save_path, img_basename+'_'+str(i)+'_'+str(j)+'_'+str(crop_size)+'.tif')
-            Driver = gdal.GetDriverByName("Gtiff")
-
             new_512 = np.zeros((crop_size,crop_size, c),dtype=np.uint8)
-            new_img = Driver.Create(out_path, crop_size, crop_size, c, img_bit)
-        
-            new_512 = img[i*crop_size:i*crop_size+crop_size,j*crop_size:j*crop_size+crop_size,:]   #横着来       
-
+            new_512 = img[h-crop_size:h, j*crop_size:j*crop_size+crop_size, :]   #横着来
+            
+            out_path = os.path.join(save_path, img_basename+'_'+str('xia')+'_'+str(j)+'_'+str(crop_size)+'.tif')
+            # cv2.imwrite(out_path,new_512)
+            Driver = gdal.GetDriverByName("Gtiff")
+            new_img = Driver.Create(out_path, crop_size,crop_size, c, img_bit)
             for band_num in range(bands):
-                band = new_img.GetRasterBand(band_num + 1)
+                band = new_img.GetRasterBand(band_num+1)
                 band.WriteArray(new_512[:, :, band_num])
 
-    #以外的部分
+        #右边的 xxxxx._you_0_8000.tif
+        for j in range(h//crop_size):
+            new_512 = np.zeros((crop_size,crop_size, c),dtype=np.uint8)
+            new_512 = img[j*crop_size:j*crop_size+crop_size, w-crop_size:w, :]   #横着来
+            
+            out_path = os.path.join(save_path,img_basename+'_'+str('you')+'_'+str(j)+'_'+str(crop_size)+'.tif')
+            # cv2.imwrite(out_path,new_512)
+            Driver = gdal.GetDriverByName("Gtiff")
+            new_img = Driver.Create(out_path, crop_size,crop_size, c, img_bit)
+            for band_num in range(bands):
+                band = new_img.GetRasterBand(band_num+1)
+                band.WriteArray(new_512[:, :, band_num])
 
-    # 下边的 xxxxx._xia_0_8000.tif
-    for j in range(w//crop_size):
+        #右下角的
         new_512 = np.zeros((crop_size,crop_size, c),dtype=np.uint8)
-        new_512 = img[h-crop_size:h, j*crop_size:j*crop_size+crop_size, :]   #横着来
-        
-        out_path = os.path.join(save_path, img_basename+'_'+str('xia')+'_'+str(j)+'_'+str(crop_size)+'.tif')
+        new_512 = img[h-crop_size:h, w-crop_size:w, :]   #横着来
+        out_path = os.path.join(save_path, img_basename+'_'+str('youxia')+'_'+str(crop_size)+'.tif')
         # cv2.imwrite(out_path,new_512)
         Driver = gdal.GetDriverByName("Gtiff")
         new_img = Driver.Create(out_path, crop_size,crop_size, c, img_bit)
         for band_num in range(bands):
             band = new_img.GetRasterBand(band_num+1)
             band.WriteArray(new_512[:, :, band_num])
-
-    #右边的 xxxxx._you_0_8000.tif
-    for j in range(h//crop_size):
-        new_512 = np.zeros((crop_size,crop_size, c),dtype=np.uint8)
-        new_512 = img[j*crop_size:j*crop_size+crop_size, w-crop_size:w, :]   #横着来
-        
-        out_path = os.path.join(save_path,img_basename+'_'+str('you')+'_'+str(j)+'_'+str(crop_size)+'.tif')
-        # cv2.imwrite(out_path,new_512)
-        Driver = gdal.GetDriverByName("Gtiff")
-        new_img = Driver.Create(out_path, crop_size,crop_size, c, img_bit)
-        for band_num in range(bands):
-            band = new_img.GetRasterBand(band_num+1)
-            band.WriteArray(new_512[:, :, band_num])
-
-    #右下角的
-    new_512 = np.zeros((crop_size,crop_size, c),dtype=np.uint8)
-    new_512 = img[h-crop_size:h, w-crop_size:w, :]   #横着来
-    out_path = os.path.join(save_path, img_basename+'_'+str('youxia')+'_'+str(crop_size)+'.tif')
-    # cv2.imwrite(out_path,new_512)
-    Driver = gdal.GetDriverByName("Gtiff")
-    new_img = Driver.Create(out_path, crop_size,crop_size, c, img_bit)
-    for band_num in range(bands):
-        band = new_img.GetRasterBand(band_num+1)
-        band.WriteArray(new_512[:, :, band_num])
 
     print(f'--- 当前 {img_basename} 图像裁切完成')
 
