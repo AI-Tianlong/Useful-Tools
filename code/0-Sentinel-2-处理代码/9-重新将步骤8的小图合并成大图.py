@@ -16,11 +16,11 @@ def main():
     crop_size = 5000
 
     # 小图标签的存储位置
-    img_patch_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/ATL推理大图/牡丹江/推理结果-24类/推理结果-24-mask-小图'
+    img_patch_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/ATL推理大图/牡丹江/推理结果-3类/推理结果-3-mask-小图'
     img_patch_list = find_data_list(img_patch_path, suffix='.png')
 
     # 合并后的大图的存储位置：
-    img_big_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/ATL推理大图/牡丹江/推理结果-24类/推理结果-24-mask'
+    img_big_path = '/opt/AI-Tianlong/Datasets/ATL-ATLNongYe/ATL推理大图/牡丹江/推理结果-3类/推理结果-3-mask'
     mkdir_or_exist(img_big_path)
 
     # 原始的大图的存储位置：为了读取尺寸
@@ -59,7 +59,7 @@ def main():
 
 
         for patch_path in path_img_merge_list:
-            
+
             if os.path.basename(patch_path).split('.')[0] == img_basename_no_suffix:
                 print(f'小图没有序号后缀, {img_basename} 有边长小于 {crop_size}, 未进行裁切, 不需要合并')
                 pass
