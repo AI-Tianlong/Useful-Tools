@@ -1,4 +1,14 @@
 ## Linux常用命令 
+## 关机命令
+```bash
+sudo shutdown     #一分钟内广播，清空缓存，然后一分钟时间一到就关机
+```
+```bsah
+sudo shutdown -h now    #shutdown -h now 是关闭运行的程序后，刷新缓冲区后再调用init 0关机
+```
+```bsah
+sudo init 0     #这个是直接关机，不管系统内运行的程序
+```
 ## 查看系统信息
 ```bash
 lsb_release -a
