@@ -33,7 +33,7 @@ def main():
         # 读取最原始的大图，获取尺寸
         # 南岗区.tif
         img_basename = os.path.basename(ori_img_path)
-        print(f'=================================')
+        print(f'==============================================')
         print(f'【ATL-LOG】当前要合并的大图为：{img_basename}')
 
         img_ori = gdal.Open(ori_img_path)
