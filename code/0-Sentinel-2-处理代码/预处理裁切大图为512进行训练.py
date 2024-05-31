@@ -67,9 +67,9 @@ def clip_big_image(image_path, save_path, splits, img_folder, label_folder, inva
    
     # 读取图像
     image_gdal = gdal.Open(img_path_all_Big)
-    img = image_gdal.ReadAsArray()
-    img = img.transpose((1,2,0))
-    img_h, img_w, img_bands = img.shape
+    image_np = image_gdal.ReadAsArray()
+    image_np = image_np.transpose((1,2,0))
+    img_h, img_w, img_bands = image_gdal.RasterYSize, image_gdal.RasterXSize, image_gdal.RasterCount
     
     # 读取标签
     label_np = np.array(Image.open(label_path_Big))
@@ -78,8 +78,10 @@ def clip_big_image(image_path, save_path, splits, img_folder, label_folder, inva
     if img_h != label_h or img_w != label_w:
         logger.warning(f"图像和标签的大小不一致，图像大小为{img_h}x{img_w}，标签大小为{label_h}x{label_w}")
         if np.abs(img_h-label_h) < 10 and np.abs(img_w-label_w) < 10:
-            label_np_resize = cv2.resize(label_np, (img_h, img_w), interpolation=cv2.INTER_NEAREST)
+            # 注意cv2的resize是宽度在前，高度在后
+            label_np_resize = cv2.resize(label_np, (img_w, img_h), interpolation=cv2.INTER_NEAREST)
             label_np = label_np_resize
+            label_h, label_w = label_np.shape
             logger.warning(f"经过resize后的，图像大小为{img_h}x{img_w}，标签大小为{label_h}x{label_w}")
         else:
             logger.warning(f"图像和标签的大小差距过大，不进行裁切")
@@ -90,36 +92,39 @@ def clip_big_image(image_path, save_path, splits, img_folder, label_folder, inva
     # 裁切标签的512的部分
     for i in range(label_h//crop_size):
         for j in range(label_w//crop_size):
-            new_label_512 = np.zeros((crop_size, crop_size), dtype=np.uint8)
             # 512小标签
+            new_label_512 = np.zeros((crop_size, crop_size), dtype=np.uint8)
             new_label_512 = label_np[i*crop_size:i*crop_size+crop_size, j*crop_size:j*crop_size+crop_size]     
             
-            new_label_512_set = set(new_label_512.flatten()) # 检查里面有几种标签
-            num_invalid = np.sum(new_label_512==0)           # 检查无效的像素个数
+            # new_label_512_set = set(new_label_512.flatten()) # 检查里面有几种标签
+            num_invalid = np.sum(new_label_512==invalid_value)           # 检查无效的像素个数
             total_pixels = new_label_512.size                # 总像素个数
-            ratio_label_15 = num_invalid / total_pixels      # 15的像素占比
+            ratio_label_invalid = num_invalid / total_pixels      # 15的像素占比
      
-
             # 根据标签判断是否保存当前标签图像: 如果无效标签的比例大于给定的阈值，则跳过不保存
-            if ratio_label_15 <= drop_ratio:
+            if ratio_label_invalid <= drop_ratio:
 
                 # 把标签中无效的地方变为255
                 # new_label_512[new_label_512==15] = 255
                 new_label_outpath = os.path.join(new_label_save_path, img_basename.split('.')[0]+'_'+str(i)+'_'+str(j)+'.tif')
+                assert new_label_512.shape == (crop_size, crop_size), f"new_label_512.shape: {new_label_512.shape} 不为 {crop_size, crop_size} \n {new_label_outpath}"
                 Image.fromarray(new_label_512).save(new_label_outpath)
 
                 # 裁切图像的512的部分
                 new_img_outpath = os.path.join(new_img_save_path, img_basename.split('.')[0]+'_'+str(i)+'_'+str(j)+'.tif') # 和label同名
                 Driver = gdal.GetDriverByName("Gtiff")
-                new_img_512 = np.zeros((crop_size,crop_size, img_bands), dtype=np.float32)
+                # new_img_512 = np.zeros((crop_size, crop_size, img_bands), dtype=np.float32)
                 # 512图像
-                new_img_512_np = img[i*crop_size:i*crop_size+crop_size,j*crop_size:j*crop_size+crop_size,:] 
+                
+                new_img_512_np = image_np[i*crop_size:i*crop_size+crop_size,j*crop_size:j*crop_size+crop_size,:] 
+                assert (new_img_512_np.shape[0],new_img_512_np.shape[1])==(crop_size,crop_size), f"new_img_512_np.shape: {new_label_512.shape} 不为 {crop_size, crop_size}"
                 new_img_gdal = Driver.Create(new_img_outpath, crop_size, crop_size, img_bands, image_gdal.GetRasterBand(1).DataType)    
                 for band_num in range(img_bands):
                     band = new_img_gdal.GetRasterBand(band_num + 1)
                     band.WriteArray(new_img_512_np[:, :, band_num])
             else:
-                pass
+                # logger.warning(f"当前裁切的图像中无效像素比例过大，已丢弃")
+                continue
 
 
 def main():
