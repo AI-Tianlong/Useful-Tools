@@ -1,4 +1,6 @@
 # Docker的命令
+- 新建一个用户，添加至 docker 组
+  [【官方文档】](https://docs.docker.com/engine/install/linux-postinstall/)
 - 帮助命令
   ```bash
   docker version # 显示版本信息
@@ -65,6 +67,7 @@
   CMD ["/bin/bash", "run.sh"]
   ```
 - 交互式进入docker
+  在最后加 `/bin/bash`即可
   ```bash
   dpcker run -it ATL1 /bin/bash
   docker exec -it 00b08fbae5cf /bin/bash
