@@ -87,6 +87,7 @@
   ```bash
   dpcker run -it ATL1 /bin/bash
   docker exec -it 00b08fbae5cf /bin/bash
+  docker exec -it atl_cambricon_pytorch113_ubuntu2004 /bin/bash
   ==> exit （退出）从容器中返回主机
   ==> P+Q+ctrl 容器不停止退出
   ```
