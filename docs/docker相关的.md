@@ -1,6 +1,18 @@
 # Docker的命令
 - 新建一个用户，添加至 docker 组
   [【官方文档】](https://docs.docker.com/engine/install/linux-postinstall/)
+  - 添加一个 `docker` 组
+    ```bash
+    sudo groupadd docker
+    ```
+  - 添加用户到 `docker` group.
+     ```bash
+     sudo usermod -aG docker $USER
+     ```
+  - 验证
+    ```bash
+    docker run hello-world
+    ``` 
 - 帮助命令
   ```bash
   docker version # 显示版本信息
