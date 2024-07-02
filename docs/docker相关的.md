@@ -30,6 +30,10 @@
   -f
   -q #只显示ID
   ```
+- 重命名镜像
+  ```bash
+  docker tag oldname:oldtag newname:newtag
+  ```
 - 创建容器，有了镜像才能创建容器实例
   ```bash
   docker run [可选参数] image
