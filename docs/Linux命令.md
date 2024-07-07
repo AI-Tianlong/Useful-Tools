@@ -167,6 +167,8 @@ set completion-ignore-case on
 ```
 ### VSCODE通过秘钥 ssh 服务器
 https://zhuanlan.zhihu.com/p/497462191
+### VSCODE 取消自动关闭文件
+https://blog.csdn.net/xhtchina/article/details/109773806
 ### VSCODE打开图片提示视图错误
 ```bash
 #linux
