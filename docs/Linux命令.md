@@ -169,6 +169,9 @@ set completion-ignore-case on
 https://zhuanlan.zhihu.com/p/497462191
 ### VSCODE 取消自动关闭文件
 https://blog.csdn.net/xhtchina/article/details/109773806
+### VSCODE 不显示代码颜色
+![image](https://github.com/AI-Tianlong/Useful-Tools/assets/50650583/a0819a60-2dcc-44ab-b1d1-6ae5593e3267)
+
 ### VSCODE打开图片提示视图错误
 ```bash
 #linux
