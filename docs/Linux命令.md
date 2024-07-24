@@ -203,3 +203,6 @@ df -lh
 export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 ```
+### ubuntu分辨率不能调，只有1024*768
+![image](https://github.com/user-attachments/assets/37148371-8644-4095-b7a2-52e6468d5312)
+
