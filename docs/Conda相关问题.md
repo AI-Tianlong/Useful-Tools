@@ -58,6 +58,14 @@ jupyter kernelspec remove xxx
 ```bash
 conda create -n ATL python=3.9
 ```
+### conda 激活环境
+```bash
+conda activate ATL
+```
+### conda deactivate 环境
+```bash
+conda deactivate ATL
+```
 ### conda删除环境
 ```bash
 conda rm -n ATL --all
