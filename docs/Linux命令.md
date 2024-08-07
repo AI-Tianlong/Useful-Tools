@@ -205,4 +205,5 @@ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRAR
 ```
 ### ubuntu分辨率不能调，只有1024*768
 ![image](https://github.com/user-attachments/assets/37148371-8644-4095-b7a2-52e6468d5312)
-
+上述调完之后，如果能正常进入界面，极大地好事，如果不能。  
+开机只显示一个`_`的话，则按 `Ctrl+Alt+F1~F7` 进入 tty 登录，然后删掉``
