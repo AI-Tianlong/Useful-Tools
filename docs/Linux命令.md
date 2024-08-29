@@ -193,6 +193,13 @@ set completion-ignore-case on
   sudo chmod 700 /home/atl #这个尤其容易忽视掉，我就是从这个坑里爬出来。有木有很高兴呀！,只能700，
   sudo chmod 600 ~/.ssh/authorized_keys
   ```
+- 重启ssh
+  ```bash
+  service sshd restart
+  systemctl restart sshd
+  ```
+
+
 ### VSCODE 取消自动关闭文件
 https://blog.csdn.net/xhtchina/article/details/109773806
 ### VSCODE 不显示代码颜色
