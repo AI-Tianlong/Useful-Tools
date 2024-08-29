@@ -166,7 +166,33 @@ set completion-ignore-case on
 "\e[B": history-search-forward
 ```
 ### VSCODE通过秘钥 ssh 服务器
-https://zhuanlan.zhihu.com/p/497462191
+参考资料：
+- https://zhuanlan.zhihu.com/p/497462191
+- https://blog.csdn.net/m0_54706625/article/details/129721121
+ 步骤1：本地电脑生成SSH秘钥
+- 在本地电脑生成秘钥
+ ```bash
+ ssh-keygen 
+ ```
+- 将本地生成的公钥`xxxx.pub`中的内容，上传到服务器/home/atl/.ssh中
+  将`xxxx.pub`中的内容，写入`.ssh/authorized_keys`
+  ```bash
+  cat xxxx.pub >> authorized_keys
+  ```
+- 在`/etc/ssh/sshd_config`中编辑
+  ```bash
+  sudo vim /etc/ssh/sshd_config
+  ```
+  ```text
+  RSAAuthentication yes  
+  PubkeyAuthentication yes 
+  ```
+- 注意设置权限问题！！！
+  ```bash
+  sudo chmod 700 ~/.ssh/
+  sudo chmod 700 /home/atl #这个尤其容易忽视掉，我就是从这个坑里爬出来。有木有很高兴呀！,只能700，
+  sudo chmod 600 ~/.ssh/authorized_keys
+  ```
 ### VSCODE 取消自动关闭文件
 https://blog.csdn.net/xhtchina/article/details/109773806
 ### VSCODE 不显示代码颜色
