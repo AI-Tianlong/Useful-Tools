@@ -171,9 +171,9 @@ set completion-ignore-case on
 - https://blog.csdn.net/m0_54706625/article/details/129721121
  步骤1：本地电脑生成SSH秘钥
 - 在本地电脑生成秘钥
- ```bash
- ssh-keygen 
- ```
+  ```bash
+  ssh-keygen 
+  ```
 - 将本地生成的公钥`xxxx.pub`中的内容，上传到服务器/home/atl/.ssh中
   将`xxxx.pub`中的内容，写入`.ssh/authorized_keys`
   ```bash
