@@ -29,6 +29,7 @@ Some Useful Tools Code
 * 文本编辑[notepad++](https://notepad-plus-plus.org/downloads/)
 * GitHub查看代码tree octotree
 * [视频格式转换Movavi Video Converter]
+* Windows桌面任务栏美化[Translucenttb](https://translucenttb.github.io/)
 
 ## VSCODE好用的插件
 - 自动补全文件夹路径 [Path Autocomplete](https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete)
