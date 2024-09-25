@@ -109,4 +109,87 @@ x_tiles,y_tiles
 r (return)：
 
 执行到当前函数返回为止。
+
+## 继续补充pdb
+参考链接：https://blog.csdn.net/weixin_49131823/article/details/132392072
+```bash
+import pdb
+
+直接在代码里需要调试的地方放一个pdb.set_trace()
+
+n 执行下一条语句
+
+w where 打印当前执行堆栈
+
+d down 执行跳转到在当前堆栈的深一层
+
+u up 执行跳转到当前堆栈的上一层
+
+b break 添加断点
+
+tbreak：（temporary break）临时断点
+
+在第一次执行到这个断点之后，就自动删除这个断点，用法和b一样
+
+cl clear 清楚断点
+
+disable：停用断点，参数为bpnumber，和cl的区别是，断点依然存在，只是不启用
+
+enable：激活断点，参数为bpnumber
+
+s step 执行下一条命令 如果本句是函数调用，则s会执行到函数的第一句
+
+r return 执行当前运行函数到结束
+
+c continue 继续执行，直到遇到下一条断点
+
+l list 列出源码 看下面代码
+
+longlist 所有源吗
+
+ll 查看当前函数的代码
+
+a args 列出当前执行函数的函数
+
+run 重新启动debug 相当于restart
+
+q quit 退出debug
+
+j jump 设置下条执行的语句函数 只能在堆栈的最底层跳转，向后重新执行，向前可直接执行到行号
+
+unt：（until）执行到下一行（跳出循环），或者当前堆栈结束
+
+conditon，给断点设置条件，当参数condition返回True的时候bpnumber断点有效，否则bpnumber断点无效
+
+直接输入Enter，会执行上一条命令；
+
+直接使用 p 变量名 查看值 print
+
+pp 好看一点的 打印
+
+bt 调用查看的堆栈
+
+alias 查看所有命令别名和对应命令 相当于配置 ls 为 l
+
+unalias 取消命名
+
+whatis 查看类型
+
+where 查看所在的位置
+
+interact 启用交互式解释器
+
+retval 打印函数的最后一次返回的返回值。
+
+source 尝试获取给定对象的源代码并显示它。
+
+display 每次在当前帧中停止执行时，显示表达式的值
+
+undisplay 在当前帧中不再显示该表达式。如果没有表达式，请清除当前帧的所有显示表达式。
+
+debug 输入一个递归调试器，它逐步遍历code参数（这是要在当前环境中执行的任意表达式或语句）。
+
+ignore 设置给定断点号的忽略计数。如果忽略count，则忽略计数将设置为0。当忽略计数为零时，断点将变为活动状态。如果为非零值，则每次达到断点且不禁用断点时，计数都会递减，并且任何关联条件的评估结果为true。
+
+commands 为断点设置一个新条件，该表达式必须在接受断点之前求值为true。如果条件不存在，任何现有的条件被移除; 即，将断点设为无条件
 ```
