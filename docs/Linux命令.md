@@ -147,6 +147,20 @@ ps -ef|grep PID
 ```bash
 kill -9 xxx
 ```
+### 查看nvlink状态
+```bash
+# 检查GPU 0的NVLink状态
+nvidia-smi nvlink -s -i 0
+
+# 检查GPU 0的NVLink功能
+nvidia-smi nvlink -c -i 0
+
+# 检查GPU 0的NVLink数据传输
+nvidia-smi nvlink -gt d -i 0
+
+```
+
+
 ### terminal忽略大小写补全
 编辑 vim ~/.inputrc 
 文件设置 (实测Ubuntu14是   /etc/.inputrc   文件)
