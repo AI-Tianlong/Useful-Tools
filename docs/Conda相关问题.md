@@ -84,3 +84,16 @@ show_channel_urls: true
 ```bash
 conda create -p D:\Application\ATL_APP\miniconda\miniconda\envs\pytorch python=3.9
 ```
+### atl用户没有对user创建的miniconda3的访问权限
+1. 添加读写执行权限给 atl 用户： 首先，确保 atl 用户有读写执行权限。
+```bash
+sudo setfacl -m u:atl:rwx /data/miniconda/miniconda3
+```
+2. 递归设置权限： 如果您希望递归地设置权限，可以使用 -R 选项。
+```bash
+sudo setfacl -R -m u:atl:rwx /data/miniconda/miniconda3
+```
+3. 您可以使用 ls -ld 命令来验证权限是否正确设置。
+```bash
+ls -ld /data/miniconda/miniconda3
+```
