@@ -158,6 +158,9 @@ nvidia-smi nvlink -c -i 0
 # 检查GPU 0的NVLink数据传输
 nvidia-smi nvlink -gt d -i 0
 
+# 查看显卡链接方式
+nvidia-smi topo -m
+
 ```
 
 
