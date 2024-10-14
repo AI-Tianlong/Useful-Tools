@@ -222,6 +222,10 @@ https://blog.csdn.net/xhtchina/article/details/109773806
 ### VSCODE 不显示代码颜色
 ![image](https://github.com/AI-Tianlong/Useful-Tools/assets/50650583/a0819a60-2dcc-44ab-b1d1-6ae5593e3267)
 
+### VSCODE pylance 不补全
+删掉`/home/atl/.vscode`和`.vscode-server`然后再重新ssh连接，然后再下载python和pylance扩展
+
+
 ### VSCODE打开图片提示视图错误
 ```bash
 #linux
