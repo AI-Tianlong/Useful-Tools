@@ -23,5 +23,8 @@ cat /etc/nv_tegra_release
 ```bash
 cat /etc/nv_boot_control.conf
 ```
-
+## jtop显示不出来
+```bash
+export TERM='xterm-256color'
+```
 
