@@ -1,0 +1,58 @@
+from PIL import Image
+import numpy as np
+from ATL_Tools import mkdir_or_exist, find_data_list
+from tqdm import tqdm 
+import os
+from osgeo import gdal
+os.environ['GTIFF_SRS_SOURCE'] = 'EPSG'  # 使用官方参数
+
+def convert_4chan_to_3chan_and_3857_to_4326(input_file, output_file):
+    try:
+        # 打开输入文件
+        input_dataset = gdal.Open(input_file)
+        if input_dataset is None:
+            raise FileNotFoundError(f"无法打开文件: {input_file}")
+
+        # 获取输入图像的投影信息
+        input_projection = input_dataset.GetProjection()
+        print(f"输入文件投影：{input_projection}")
+
+        # 创建虚拟数据集（VRT）文件，使用最近邻插值（nearest）
+        vrt_options = gdal.BuildVRTOptions(resampleAlg='nearest', 
+                                           srcNodata=None, 
+                                           VRTNodata=None,
+                                           bandList=[1, 2, 3])
+        vrt_dataset = gdal.BuildVRT('/vsimem/temp.vrt', input_dataset, options=vrt_options)
+
+        # 使用 gdal.Warp 将投影从 EPSG:3857 转换为 EPSG:4326，并使用最近邻插值
+        gdal.Warp(output_file, vrt_dataset, dstSRS="EPSG:4326", resampleAlg='nearest')
+
+
+        print(f"投影转换完成，输出文件：{output_file}")
+
+    except Exception as e:
+        print(f"发生错误: {e}")
+
+    finally:
+        # 确保虚拟数据集被正确释放和删除
+        vrt_dataset = None
+        gdal.Unlink('/vsimem/temp.vrt')
+
+def main():
+    img_4chan_3857_path = '../谷歌地图-基准-3857-4chan/'
+    img_3chan_4326_output_path = '../谷歌地图-基准-4326-3chan/'
+
+    mkdir_or_exist(img_3chan_4326_output_path)
+    
+    img_list = find_data_list(img_4chan_3857_path, suffix='.tif')
+
+    for img_path_ in tqdm(img_list):
+        output_path = os.path.join(img_3chan_4326_output_path, os.path.basename(img_path_))
+        convert_4chan_to_3chan_and_3857_to_4326(img_path_, output_path)
+
+    # img_path_ = '/data/AI-Tianlong/Datasets/1-paper-segmentation/2-多领域地物覆盖基础/Google_5B_24类/Google_1m_4chan_3857/GF2_PMS1__L1A0000564539-MSS1.tif'
+    # output_path = os.path.join(img_3chan_4326_output_path, os.path.basename(img_path_))
+    # convert_4chan_to_3chan_and_3857_to_4326(img_path_, output_path)
+
+if __name__ == '__main__':
+    main()
