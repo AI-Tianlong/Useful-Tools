@@ -266,5 +266,5 @@ sudo rm -f /etc/X11/xorg.conf
 ```
 ### HIT服务器查看配额限制
 ```bash
-mmlsquota -g 1047 --block-size auto dssg | grep aitlong
+mmlsquota -g 1047 --block-size auto dssg
 ```
