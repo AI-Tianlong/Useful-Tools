@@ -264,3 +264,7 @@ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRAR
 ```bash
 sudo rm -f /etc/X11/xorg.conf
 ```
+### HIT服务器查看配额限制
+```bash
+mmlsquota -g 1047 --block-size auto dssg | grep aitlong
+```
