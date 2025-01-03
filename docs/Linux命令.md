@@ -268,3 +268,8 @@ sudo rm -f /etc/X11/xorg.conf
 ```bash
 mmlsquota -g 1047 --block-size auto dssg
 ```
+### HIT服务器 .ssh 文件的权限
+```bash
+chmod 600 .ssh/id_ecdsa
+chmod 644 .ssh/id_ecdsa.pub
+```
