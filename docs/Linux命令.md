@@ -273,3 +273,8 @@ mmlsquota -g 1047 --block-size auto dssg
 chmod 600 .ssh/id_ecdsa
 chmod 644 .ssh/id_ecdsa.pub
 ```
+### HIT 服务器查看作业详情
+```bash
+scontrol show job 12345
+
+```
