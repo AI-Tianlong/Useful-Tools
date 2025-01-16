@@ -1,6 +1,9 @@
 ## Git相关的命令
 
-
+### 生成scp秘钥
+```bash
+ssh-keygen -t rsa -b 4096 -C "SIRS-ATL"
+```
 ### 生成Github秘钥
 [生成github秘钥](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 ```bash
