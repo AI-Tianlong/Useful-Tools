@@ -15,7 +15,7 @@
 - 🛰 I’m interested in **Deep Learning** + **Remote Sensing** + **MRF & CNN**
 - 🏡 Visit my homepage: [AI-Tianlong.github.io](https://AI-Tianlong.github.io)
 - 🛠️ I actively contribute to the OpenMMLab ecosystem
-- 📫 Contact me: iichengzi@163.com
+
 
 ---
 
@@ -23,7 +23,6 @@
 
 | Name | Description | Link |
 |------|-------------|------|
-| 🧠 **HSKIM** | Hierarchical self-learning inference for semantic segmentation | [🔗 GitHub](https://github.com/iichengzi/HSKIM) |
 | 🧠 **SSVEP-OpenBCI** | EEG-based brain-computer interface using OpenBCI | [🔗](https://github.com/AI-Tianlong/SSVEP-BCI-OpenBCI) |
 | 🧰 **Useful Tools** | Handy data tools & ML utilities | [🔗](https://github.com/AI-Tianlong/Useful-Tools) |
 | 🧊 **Cube Recovery Robot** | Smart robot arm for cube solving | [🔗](https://github.com/AI-Tianlong/Cube-Recovery-Robot) |
