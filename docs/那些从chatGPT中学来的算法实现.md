@@ -195,6 +195,6 @@ commands 为断点设置一个新条件，该表达式必须在接受断点之�
 ```
 ## 获取MM系列的log，实现打印log
 ```bash
-   import pdb;pdb.set_trace()
-   logger: MMLogger = MMLogger.get_current_instance()
+import pdb;pdb.set_trace()
+logger: MMLogger = MMLogger.get_current_instance()
 ```
