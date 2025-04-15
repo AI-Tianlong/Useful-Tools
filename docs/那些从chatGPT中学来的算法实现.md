@@ -193,3 +193,8 @@ ignore 设置给定断点号的忽略计数。如果忽略count，则忽略计�
 
 commands 为断点设置一个新条件，该表达式必须在接受断点之前求值为true。如果条件不存在，任何现有的条件被移除; 即，将断点设为无条件
 ```
+## 获取MM系列的log，实现打印log
+```bash
+   import pdb;pdb.set_trace()
+   logger: MMLogger = MMLogger.get_current_instance()
+```
