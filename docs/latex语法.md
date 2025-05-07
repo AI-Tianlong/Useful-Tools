@@ -14,6 +14,7 @@
 ```
 ## 颜色
 ```latex
+\usepackage{xcolor}
 \textcolor{red}{\textbf{Apple}}
 ```
 
