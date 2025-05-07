@@ -6,7 +6,7 @@ Some Useful Tools Code
 ## 一些常用的命令
 * [Linux命令](docs/Linux命令.md)
 * [markdown语法]()
-* [latex语法]()
+* [latex语法](https://github.com/AI-Tianlong/Useful-Tools/blob/main/docs/latex%E8%AF%AD%E6%B3%95.md)
 * [Git相关的](docs/Git相关.md)
 * [Docker相关的](docs/docker相关的.md)
 * [那些从chatGPT中学来的算法实现](/docs/%E9%82%A3%E4%BA%9B%E4%BB%8EchatGPT%E4%B8%AD%E5%AD%A6%E6%9D%A5%E7%9A%84%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0.md)
