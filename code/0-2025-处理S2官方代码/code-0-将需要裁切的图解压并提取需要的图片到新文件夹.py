@@ -72,9 +72,9 @@ def find_unzip_folders(directory):
 
 if __name__ == "__main__":
     # 示例：指定 ZIP 文件路径和解压目标文件夹
-    zip_file_path = r'../../0-数据集-下载同时相的S2数据-zip压缩包/'  # 替换为你的 ZIP 文件路径
-    output_folder = r'../../0-数据集-下载同时相的S2数据-大图文件/'  # 替换为解压目标文件夹路径
-    
+    zip_file_path = '../0-S2-zip压缩文件-25张/'  # 替换为你的 ZIP 文件路径
+    output_folder = '../0-S2-大图文件-25张/'  # 替换为解压目标文件夹路径
+    mkdir_or_exist(output_folder)
 
     zip_file_path = os.path.abspath(zip_file_path)
     output_folder = os.path.abspath(output_folder)
