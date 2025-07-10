@@ -10,8 +10,6 @@ import os
 import math
 import numpy as np
 from typing import List
-from ATL_Tools import setup_logger
-logger = setup_logger()
 
 # 读取文档4中的文件，第一列为S2的文件名，第二三列为图像名
 def read_txt_to_dict(file_path):
@@ -142,7 +140,27 @@ def delete_folder_with_terminal(folder_path):
     except Exception as e:
         print(f"发生错误: {e}")
 
-  
+
+def Mosaic_all_imgs_gdal(img_file_list: list,
+                         output_path: str,
+                         srcNodata = None,
+                         dstNodata = None):
+    
+    data_ds = gdal.Open(img_file_list[0])
+    if data_ds is not None:
+        dataset_type = data_ds.GetRasterBand(1).DataType
+    
+    gdal.SetConfigOption('GDAL_NUM_THREADS', 'ALL_CPUS')
+
+    gdal.Warp(
+        output_path,
+        img_file_list,
+        format='GTiff',
+        outputType=dataset_type,
+        dstNodata=dstNodata,  # 输出无数据值
+        srcNodata=srcNodata,  # 输入无数据值
+    )
+
 def Mosaic_all_imgs(img_file_path: str,
                     output_path: str,
                     add_alpha_chan: bool=False,
@@ -257,7 +275,6 @@ def Mosaic_all_imgs(img_file_path: str,
     # 分别表示左上角的X坐标、水平像素分辨率、X方向的旋转（通常为0）、
     # 左上角的Y坐标、Y方向的旋转（通常为0）、垂直像素分辨率。
     # 这一行代码将获取的元组转换为列表形式，并赋值给 geotrans。
-
     width_geo_resolution = geotrans[1]
     heigh_geo_resolution = geotrans[5] # 负值
     # print(f'width_geo_resolution:{width_geo_resolution}, heigh_geo_resolution:{heigh_geo_resolution}')
@@ -282,7 +299,6 @@ def Mosaic_all_imgs(img_file_path: str,
     geotrans[0] = min_x
     geotrans[3] = max_y
     out_ds.SetGeoTransform(geotrans)
-
 
     #定义仿射逆变换
     inv_geotrans = gdal.InvGeoTransform(geotrans)
@@ -361,12 +377,12 @@ def Mosaic_all_imgs(img_file_path: str,
         
     print(f'-->镶嵌图像已完成，输出至 {output_path}')
      
-
-
 def crop_tif_with_json_zero_new(img_path,
                             output_path: str,
                             geojson_path: str,
-                            nodata_value: int = 255):
+                            srcNodata = None,
+                            dstNodata = None,
+                            cropToCutline: bool = False):
   
     if os.path.exists(output_path):
         print(f"--> 存在{output_path}, 已覆盖")
@@ -378,7 +394,6 @@ def crop_tif_with_json_zero_new(img_path,
     elif isinstance(img_path, gdal.Dataset):
         raster_ds = img_path
     assert raster_ds!=None, f'打开 {raster_ds} 失败'
-
     # 打开GeoJSON文件
     geojson_ds = ogr.Open(geojson_path)
     geojson_layer = geojson_ds.GetLayer()
@@ -396,17 +411,21 @@ def crop_tif_with_json_zero_new(img_path,
     else:
         raise ValueError("无法确定图像的EPSG代码，请检查图像投影！")
 
-    # import pdb; pdb.set_trace()
+    # 设置GDAL多线程
+    gdal.SetConfigOption('GDAL_NUM_THREADS', 'ALL_CPUS')
 
     warp_options = gdal.WarpOptions(cutlineDSName=geojson_path,
                                     cutlineWhere=None,
-                                    cropToCutline=True, # 裁剪到矢量范围
-                                    dstNodata = nodata_value, # 设置裁剪后的无数据值为 255
-                                    outputBounds=(xmin, ymin, xmax, ymax),
+                                    cropToCutline=cropToCutline, # 裁剪到矢量范围, False的话，保持原图的尺寸
+                                    srcNodata=srcNodata,  # 设置输入的无数据值为 0
+                                    dstNodata=dstNodata, # 设置裁剪后的无数据值为 255
+                                    # outputBounds=(xmin, ymin, xmax, ymax),
                                     # dstSRS=dst_srs) # EPSG:32651
-                                    dstSRS='EPSG:4326')  # 设置输出投影，这里使用EPSG:4326，即WGS84经纬度坐标系,这样才不会有合并的问题呢！
+                                    dstSRS='EPSG:4326',  # 设置输出投影，这里使用EPSG:4326，即WGS84经纬度坐标系
+                                    )  # 设置GDAL使用所有CPU线程) 
 
 
+    gdal.SetConfigOption('GDAL_NUM_THREADS', 'ALL_CPUS')  # 设置GDAL使用所有CPU线程
     # 执行裁剪
     gdal.Warp(output_path, raster_ds, options=warp_options)
 
@@ -414,9 +433,9 @@ def crop_tif_with_json_zero_new(img_path,
     raster_ds = None
     geojson_ds = None
     if isinstance(img_path, str):
-        print(f'--> 根据矢量裁切{img_path}完成！无数据区域设置为 {nodata_value}')
+        print(f'--> 根据矢量裁切{img_path}完成！无数据区域设置为 {dstNodata}')
     elif isinstance(img_path, gdal.Dataset):
-        print(f'--> 根据矢量裁切完成！无数据区域设置为 {nodata_value}')
+        print(f'--> 根据矢量裁切完成！无数据区域设置为 {dstNodata}')
 
 def intersect(ext1, ext2):
     min_x = max(ext1[0], ext2[0])  # 计算交集的最小x坐标
@@ -427,8 +446,6 @@ def intersect(ext1, ext2):
         return None  # 如果无交集，返回None
     else:
         return [min_x, min_y, max_x, max_y]  # 返回交集坐标
-    
-# 少考虑了问题：不同图像具有不同的投影的时候，还是要先按照4326才能对齐！
 def align_image_new(src_path: str, 
                 ref_path: str, 
                 src_out_put_path: str,  
@@ -462,9 +479,13 @@ def align_image_new(src_path: str,
     gdal.SetConfigOption('GDAL_NUM_THREADS', 'ALL_CPUS')  # 设置GDAL使用所有CPU线程
 
     align_src_option = gdal.WarpOptions(
-                    format='GTiff', outputBounds=bound,  # 设置输出格式为VRT，输出范围为交集范围
-                    xRes=ref_resx, yRes=ref_resy,              # 设置x和y方向的分辨率
-                    dstNodata=0, srcNodata=0, srcAlpha=False,  # 设置无数据值
+                    format='GTiff', 
+                    outputBounds=bound,  # 设置输出格式为VRT，输出范围为交集范围
+                    xRes=ref_resx, 
+                    yRes=ref_resy,              # 设置x和y方向的分辨率
+                    dstNodata=0, 
+                    srcNodata=0, 
+                    srcAlpha=False,  # 设置无数据值
                     resampleAlg=src_resampleAlg,     # 设置重采样算法为最近邻插值
                     multithread=True,                  # 启用多线程
                     warpOptions=['GDAL_NUM_THREADS=ALL_CPUS']  # 设置GDAL使用所有CPU线程
@@ -474,14 +495,11 @@ def align_image_new(src_path: str,
 
 if __name__ == "__main__":
         
-    name_txt_file_path = './文档-4-S2-图片名称和S2文件名称对应列表.txt'  # json名字,S2大图1名字,S2大图2名字
-    big_img_folder_path = '../0-S2-大图文件-25张/'
-    crop_save_dir = '../0-S2-按照json裁切大图-13张/'
-    final_s2_dataset_save_path = '../0-最终S2数据集文件-13张/'
-    json_file_path = '../0-JSON文件/'
-    
-    json_suffix = '.geojson'
-
+    name_txt_file_path = './文档4-S2文件名与原始文件夹对应列表.txt'
+    big_img_folder_path = '../1-解压的大图/'
+    crop_save_dir = '../2-JSON裁切后的图像/'
+    final_s2_dataset_save_path = '../3-最终图像文件/'
+    json_file_path = '../JSON/'
     mkdir_or_exist(crop_save_dir)
     mkdir_or_exist(final_s2_dataset_save_path)
 
@@ -493,26 +511,25 @@ if __name__ == "__main__":
     # 开始按照键值对大图进行裁切
     for key, value in data_dict.items():
         crop_img_name = key  # s2数据集的文件名
-        logger.info(f'正在处理区域：{crop_img_name}')
-
+        
         if os.path.exists(os.path.join(crop_save_dir, crop_img_name)):
             print(f'文件夹已存在，跳过裁切：{crop_img_name}')
             continue
-        
+
         for big_img_dir_name in value:
             big_img_dir_path = os.path.join(big_img_folder_path, big_img_dir_name+'-大图')
-            # import pdb; pdb.set_trace()
+
             crop_img_save_dir = os.path.join(crop_save_dir, crop_img_name, big_img_dir_name+'-未像素对齐')
             mkdir_or_exist(crop_img_save_dir)
-            to_crop_img_list = find_data_list(big_img_dir_path, '.jp2')
+            to_crop_img_list = find_data_list(big_img_dir_path, '.jp2')  
             # step0: 创建空文件夹
             mkdir_or_exist(os.path.join(crop_save_dir, crop_img_name))
 
             # step1: 按照json矢量裁切大图，并保持原始图像的投影和分辨率
             for to_crop_img_path in to_crop_img_list:
                 crop_img_save_path = os.path.join(crop_img_save_dir, os.path.basename(to_crop_img_path).replace('.jp2', '.tif'))
-                crop_json_path = os.path.join(json_file_path, crop_img_name + json_suffix)
-                crop_tif_with_json_zero_new(to_crop_img_path, crop_img_save_path, crop_json_path, nodata_value=0)
+                crop_json_path = os.path.join(json_file_path, crop_img_name + '.geojson')
+                crop_tif_with_json_zero_new(to_crop_img_path, crop_img_save_path, crop_json_path, srcNodata=None, dstNodata=None, cropToCutline=False)
             
             # step2：像素对齐
             align_crop_img_save_dir = os.path.join(crop_save_dir, crop_img_name, big_img_dir_name+'-像素对齐')
@@ -539,16 +556,18 @@ if __name__ == "__main__":
             # 删除掉 step1 和 step2 的中间文件，节省空间
             delete_folder_with_terminal(crop_img_save_dir)
             delete_folder_with_terminal(align_crop_img_save_dir)
-
+        
         # Step4：合并多张波段merge后的图像
         # 如果是由有多张图像组成的，则合并多张图像为一张最终的结果，并命名为S2的那个文件
         final_s2_img_save_path = os.path.join(crop_save_dir, crop_img_name, crop_img_name + '.tif')
         to_do_mosaic_list = find_data_list(os.path.join(crop_save_dir, crop_img_name), suffix='_10bands_merged.tif', recursive=False)
         if len(to_do_mosaic_list)>1:
-            Mosaic_all_imgs('', final_s2_img_save_path, nan_or_zero='zero', img_list=to_do_mosaic_list, band_order_list=band_order_list)
+            Mosaic_all_imgs_gdal(to_do_mosaic_list, final_s2_img_save_path, srcNodata=0, dstNodata=0)
+            # Mosaic_all_imgs('', final_s2_img_save_path, nan_or_zero='zero', img_list=to_do_mosaic_list, band_order_list=band_order_list)
             final_final_s2_img_save_path = os.path.join(final_s2_dataset_save_path, crop_img_name + '.tif')
             shutil.copy(final_s2_img_save_path, final_final_s2_img_save_path)
         else:
+        
         # step5: 保存一份最终的S2图像到新文件夹中
             final_final_s2_img_save_path = os.path.join(final_s2_dataset_save_path, crop_img_name + '.tif')
             shutil.copy(to_do_mosaic_list[0], final_final_s2_img_save_path)
