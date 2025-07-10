@@ -72,8 +72,8 @@ def find_unzip_folders(directory):
 
 if __name__ == "__main__":
     # 示例：指定 ZIP 文件路径和解压目标文件夹
-    zip_file_path = '../0-S2-zip压缩文件-25张/'  # 替换为你的 ZIP 文件路径
-    output_folder = '../0-S2-大图文件-25张/'  # 替换为解压目标文件夹路径
+    zip_file_path = '../0-原始压缩包zip/'  # 替换为你的 ZIP 文件路径
+    output_folder = '../1-解压的大图/'  # 替换为解压目标文件夹路径
     mkdir_or_exist(output_folder)
 
     zip_file_path = os.path.abspath(zip_file_path)
@@ -86,16 +86,15 @@ if __name__ == "__main__":
     if unzip:
         zip_list = find_data_list(zip_file_path, suffix='.zip', recursive=False)
         for zip_file in tqdm(zip_list):
-            # import pdb; pdb.set_trace()  # 调试用
             if os.path.exists(os.path.join(output_folder, os.path.basename(zip_file).replace('.zip', '')+'-大图')):
                 print(f'-- 文件已存在: {os.path.join(output_folder, os.path.basename(zip_file).replace(".zip", ""))}')
                 continue
             else:
                 unzip_with_terminal(zip_file, output_folder)
-            
+
             # 调用函数找到 .SAFE 文件夹
             # S2_dir_list = find_unzip_folders(output_folder)
-            S2_dir = os.path.join(output_folder, os.path.basename(zip_file).replace('.zip', ''))
+            S2_dir = os.path.join(output_folder, os.path.basename(zip_file).replace('.zip', '.SAFE'))  # 获取解压后的文件夹路径
             
             S2_img_suffix = ['_B02_10m.jp2', '_B03_10m.jp2', '_B04_10m.jp2', '_B05_20m.jp2', '_B06_20m.jp2', '_B07_20m.jp2', '_B08_10m.jp2', '_B8A_20m.jp2', '_B11_20m.jp2', '_B12_20m.jp2']
             save_img_dir = os.path.join(output_folder, os.path.basename(S2_dir)+'-大图')
