@@ -10,7 +10,7 @@ import os
 import math
 import numpy as np
 from typing import List
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 
 # 读取文档4中的文件，第一列为S2的文件名，第二三列为图像名
 def read_txt_to_dict(file_path):
@@ -494,36 +494,6 @@ def align_image_new(src_path: str,
     align_src = gdal.Warp(src_out_put_path, srcDSOrSrcDSTab=src_ds, options=align_src_option)  # 对目标影像进行重投影和对齐
     print('')
 
-
-def parallel_crop_task(to_crop_img_path, crop_img_save_dir, crop_img_name, json_file_path):
-    crop_img_save_path = os.path.join(crop_img_save_dir, os.path.basename(to_crop_img_path).replace('.jp2', '.tif'))
-    crop_json_path = os.path.join(json_file_path, crop_img_name + '.geojson')
-
-    # import pdb; pdb.set_trace()
-    crop_tif_with_json_zero_new(
-        to_crop_img_path,
-        crop_img_save_path,
-        crop_json_path,
-        srcNodata=None,
-        dstNodata=None,
-        cropToCutline=False
-    )
-    # return crop_img_save_path        
-
-def parallel_align_task(to_align_img_path, ref_img_path, align_crop_img_save_dir):
-    to_align_img_basename = os.path.basename(to_align_img_path)
-    if '_20m.tif' in to_align_img_basename:
-        align_img_output_path = os.path.join(align_crop_img_save_dir, to_align_img_basename.replace('20m.tif', '10m.tif'))
-        align_image_new(
-            src_path=to_align_img_path,
-            ref_path=ref_img_path,
-            src_out_put_path=align_img_output_path
-        )
-    elif '_10m.tif' in to_align_img_basename:
-        align_img_output_path = os.path.join(align_crop_img_save_dir, to_align_img_basename.replace('10m.tif', '10m.tif'))
-        shutil.copy(to_align_img_path, align_img_output_path)
-
-
 if __name__ == "__main__":
         
     name_txt_file_path = './文档4-S2文件名与原始文件夹对应列表.txt'
@@ -557,58 +527,29 @@ if __name__ == "__main__":
             mkdir_or_exist(os.path.join(crop_save_dir, crop_img_name))
 
             # step1: 按照json矢量裁切大图，并保持原始图像的投影和分辨率
-            # for to_crop_img_path in to_crop_img_list:
-            #     crop_img_save_path = os.path.join(crop_img_save_dir, os.path.basename(to_crop_img_path).replace('.jp2', '.tif'))
-            #     crop_json_path = os.path.join(json_file_path, crop_img_name + '.geojson')
-            #     crop_tif_with_json_zero_new(to_crop_img_path, crop_img_save_path, crop_json_path, srcNodata=None, dstNodata=None, cropToCutline=False)
-
-            # step1: 并行裁切按照json矢量裁切大图，并保持原始图像的投影和分辨率
-            max_workers = min(8, os.cpu_count() or 1)  # 根据 CPU 核心数自动选择线程数
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                futures = [
-                    executor.submit(parallel_crop_task, to_crop_img_path, crop_img_save_dir, crop_img_name, json_file_path)
-                    for to_crop_img_path in to_crop_img_list
-                ]
-                for future in as_completed(futures):
-                    try:
-                        result = future.result()
-                        print(f'✅ 裁切完成: {result}')
-                    except Exception as e:
-                        print(f'❌ 裁切失败: {e}')
-
-
+            for to_crop_img_path in to_crop_img_list:
+                crop_img_save_path = os.path.join(crop_img_save_dir, os.path.basename(to_crop_img_path).replace('.jp2', '.tif'))
+                crop_json_path = os.path.join(json_file_path, crop_img_name + '.geojson')
+                crop_tif_with_json_zero_new(to_crop_img_path, crop_img_save_path, crop_json_path, srcNodata=None, dstNodata=None, cropToCutline=False)
+            
             # step2：像素对齐
             align_crop_img_save_dir = os.path.join(crop_save_dir, crop_img_name, big_img_dir_name+'-像素对齐')
             mkdir_or_exist(align_crop_img_save_dir)
             ref_img_path = find_data_list(crop_img_save_dir, suffix='_B02_10m.tif')[0] # 只有一个符合，按照这个当做参考
             to_align_img_list = find_data_list(crop_img_save_dir, suffix='.tif') # 只对齐20m的 6个
+            for to_align_img_path in tqdm(to_align_img_list):
+                to_align_img_basename = os.path.basename(to_align_img_path)
+                if '_20m.tif' in to_align_img_basename:
+                    align_img_output_path = os.path.join(align_crop_img_save_dir, to_align_img_basename.replace('20m.tif', '10m.tif'))
+                    # 把对齐像素后的 图像和标签 都保存出来
+                    align_image_new(src_path=to_align_img_path, 
+                                    ref_path=ref_img_path, 
+                                    src_out_put_path = align_img_output_path)
+                elif '_10m.tif' in to_align_img_basename:
+                    align_img_output_path = os.path.join(align_crop_img_save_dir, to_align_img_basename.replace('10m.tif', '10m.tif'))
+                    # 单纯的把文件复制一份
+                    shutil.copy(to_align_img_path, align_img_output_path)
             
-            # for to_align_img_path in tqdm(to_align_img_list):
-            #     to_align_img_basename = os.path.basename(to_align_img_path)
-            #     if '_20m.tif' in to_align_img_basename:
-            #         align_img_output_path = os.path.join(align_crop_img_save_dir, to_align_img_basename.replace('20m.tif', '10m.tif'))
-            #         # 把对齐像素后的 图像和标签 都保存出来
-            #         align_image_new(src_path=to_align_img_path, 
-            #                         ref_path=ref_img_path, 
-            #                         src_out_put_path = align_img_output_path)
-            #     elif '_10m.tif' in to_align_img_basename:
-            #         align_img_output_path = os.path.join(align_crop_img_save_dir, to_align_img_basename.replace('10m.tif', '10m.tif'))
-            #         # 单纯的把文件复制一份
-            #         shutil.copy(to_align_img_path, align_img_output_path)
-            with ThreadPoolExecutor(max_workers=max_workers) as executor:
-                futures = [
-                    executor.submit(parallel_align_task, to_align_img_path, ref_img_path, align_crop_img_save_dir)
-                    for to_align_img_path in to_align_img_list
-                ]
-
-                for future in tqdm(as_completed(futures), total=len(futures), desc='对齐影像'):
-                    try:
-                        result = future.result()
-                        print(f'✅ 完成: {result}')
-                    except Exception as e:
-                        print(f'❌ 出错: {e}')
-
-
             # step3: 合并多波段图像
             band_order_list = ['B02', 'B03', 'B04', 'B05','B06','B07','B08', 'B8A', 'B11', 'B12']
             crop_img_10m_output_path = os.path.join(crop_save_dir, crop_img_name, big_img_dir_name + '_10bands_merged.tif')
@@ -622,10 +563,12 @@ if __name__ == "__main__":
         final_s2_img_save_path = os.path.join(crop_save_dir, crop_img_name, crop_img_name + '.tif')
         to_do_mosaic_list = find_data_list(os.path.join(crop_save_dir, crop_img_name), suffix='_10bands_merged.tif', recursive=False)
         if len(to_do_mosaic_list)>1:
+            print(f'正在调用多核线程对 {len(to_do_mosaic_list)} 张图像进行镶嵌...')
             Mosaic_all_imgs_gdal(to_do_mosaic_list, final_s2_img_save_path, srcNodata=0, dstNodata=0)
             # Mosaic_all_imgs('', final_s2_img_save_path, nan_or_zero='zero', img_list=to_do_mosaic_list, band_order_list=band_order_list)
             final_final_s2_img_save_path = os.path.join(final_s2_dataset_save_path, crop_img_name + '.tif')
             shutil.copy(final_s2_img_save_path, final_final_s2_img_save_path)
+            print(f'镶嵌完成，当前时间：{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
         else:
         
         # step5: 保存一份最终的S2图像到新文件夹中
