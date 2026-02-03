@@ -1,6 +1,10 @@
 # Docker的命令
 - 推荐安装的VSCODE插件：**Dev Containers**
 - 要调用gpu，还需安装 “nvidia-container-toolkit”
+- ```bash
+  重新进入没有被 -rm 的容器
+  docker start -ai a2689d9a0b50
+  ```
 - 新建一个用户，添加至 docker 组
   [【官方文档】](https://docs.docker.com/engine/install/linux-postinstall/)
   - 添加一个 `docker` 组
