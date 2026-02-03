@@ -1,4 +1,5 @@
 # Docker的命令
+- 推荐安装的VSCODE插件：**Dev Containers**
 - 新建一个用户，添加至 docker 组
   [【官方文档】](https://docs.docker.com/engine/install/linux-postinstall/)
   - 添加一个 `docker` 组
