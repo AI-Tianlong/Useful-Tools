@@ -82,7 +82,11 @@
   ```
   ```bash
   # 创建容器
-  docker run --gpus all --shm-size=50g -it -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/input_path:/input_path -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/output_path:/output_path atl-mmseg-water:v1
+  docker run --gpus all \
+    --shm-size=50g -it \
+    -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/input_path:/input_path \
+    -v /opt/AI-Tianlong/2024bisai-docker/2024-ISPRS/water/output_path:/output_path \
+    atl-mmseg-water:v1
   ```
   ```bash
   # 如果容器有启动命令,加上/bin/bash
