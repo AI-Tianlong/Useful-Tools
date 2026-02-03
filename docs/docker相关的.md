@@ -9,10 +9,38 @@
      ```bash
      sudo usermod -aG docker $USER
      ```
-  - 验证
+  - 验证，网络问题请配置加速源
     ```bash
     docker run hello-world
-    ``` 
+    ```
+- 配置加速源
+  ```bash
+  sudo vim /etc/docker/daemon.json
+  ```
+  复制粘贴以下内容：
+    ```text
+    {
+      "registry-mirrors": [
+        "https://do.nark.eu.org/",
+        "https://dc.j8.work/",
+        "https://docker.m.daocloud.io/",
+        "https://dockerproxy.com/",
+        "https://docker.mirrors.ustc.edu.cn/",
+        "https://docker.nju.edu.cn/",
+        "https://hub-mirror.c.163.com/",
+        "https://mirror.baidubce.com/"
+      ]
+    }
+    ```
+  重启docker
+  ```bash
+  sudo systemctl daemon-reload
+  sudo systemctl restart docker
+  ```
+  再次测试 run hello-world
+  ```bash
+  docker run hello-world
+  ```
 - 帮助命令
   ```bash
   docker version # 显示版本信息
