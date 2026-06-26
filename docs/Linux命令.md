@@ -337,11 +337,9 @@ Missing bearer authentication in header
 说明服务器已经成功通过笔记本代理连接 OpenAI。
 
 
-## 4. 在VSCODE的设置(JSON)中，添加一下字段
+## 4. 在VSCODE的设置(JSON)中，添加以下字段
 ```txt
 {
-    "editor.fontSize": 16,
-
     "remote.SSH.remoteEnvironment": {
         "HTTP_PROXY": "http://127.0.0.1:17890",
         "HTTPS_PROXY": "http://127.0.0.1:17890",
