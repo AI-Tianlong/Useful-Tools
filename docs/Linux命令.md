@@ -278,3 +278,86 @@ chmod 644 .ssh/id_ecdsa.pub
 scontrol show job 12345
 
 ```
+
+
+# VS Code Remote-SSH 使用 Codex：核心配置摘要
+
+## 1. Windows SSH 配置
+
+```sshconfig
+Host hit-server
+    HostName 服务器IP地址
+    User atl
+    Port 22
+    IdentityFile C:/Users/ATL/.ssh/id_ed25519
+
+    RemoteForward 17890 127.0.0.1:10808
+    ExitOnForwardFailure yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+```
+
+## 2. Linux 代理配置
+
+在远程服务器的 `~/.bashrc` 中加入：
+
+```bash
+export HTTP_PROXY="http://127.0.0.1:17890"
+export HTTPS_PROXY="http://127.0.0.1:17890"
+
+export http_proxy="$HTTP_PROXY"
+export https_proxy="$HTTPS_PROXY"
+
+export NO_PROXY="127.0.0.1,localhost,::1"
+export no_proxy="$NO_PROXY"
+```
+
+加载配置：
+
+```bash
+source ~/.bashrc
+```
+
+## 3. 验证网络
+
+```bash
+ss -lnt | grep 17890
+```
+
+```bash
+curl -sS https://api.openai.com/v1/models
+```
+
+返回：
+
+```text
+Missing bearer authentication in header
+```
+
+说明服务器已经成功通过笔记本代理连接 OpenAI。
+
+
+## 4. 在VSCODE的设置(JSON)中，添加一下字段
+```txt
+{
+    "editor.fontSize": 16,
+
+    "remote.SSH.remoteEnvironment": {
+        "HTTP_PROXY": "http://127.0.0.1:17890",
+        "HTTPS_PROXY": "http://127.0.0.1:17890",
+        "http_proxy": "http://127.0.0.1:17890",
+        "https_proxy": "http://127.0.0.1:17890",
+        "NO_PROXY": "127.0.0.1,localhost,::1",
+        "no_proxy": "127.0.0.1,localhost,::1"
+    }
+}
+```
+最后在 VS Code 中运行：
+
+```text
+Remote-SSH: Kill VS Code Server on Host...
+```
+
+重新连接服务器，使 Codex 插件读取新的代理环境变量。
+::: 
+
