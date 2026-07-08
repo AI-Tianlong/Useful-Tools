@@ -1,4 +1,16 @@
-## Linux常用命令 
+# Linux常用命令 
+## 远程linux的桌面到本地
+安装MobaXterm，然后终端执行：
+```bash
+conda deactivate
+qgis
+# 再新建一个终端
+cd /xxxxx
+xdg-open ./
+或者：
+sudo apt install nemo
+nemo .
+```
 ## 关机命令
 ```bash
 sudo shutdown     #一分钟内广播，清空缓存，然后一分钟时间一到就关机
