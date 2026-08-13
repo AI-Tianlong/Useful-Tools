@@ -1,4 +1,11 @@
 # Linux常用命令 
+## Vscode远程连接关闭后台进程
+```bash
+Get-CimInstance Win32_Process -Filter "Name='ssh.exe'" |
+Select-Object ProcessId, CommandLine
+
+Stop-Process -Id 47920,48000 -Force
+```
 ## 远程linux的桌面到本地
 安装MobaXterm，然后终端执行：
 ```bash
